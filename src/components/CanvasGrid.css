@@ -1,0 +1,72 @@
+:root {
+	--canvas-bg: var(--color-canvas);
+	--canvas-grid-line: rgba(30, 30, 30, 0.035);
+	--canvas-dot: rgba(30, 30, 30, 0.12);
+}
+
+.canvas-page {
+	height: 100dvh;
+	background: var(--canvas-bg);
+	overscroll-behavior: none;
+	touch-action: none;
+}
+
+.canvas-grid {
+	position: absolute;
+	inset: 0;
+	z-index: 0;
+	pointer-events: none;
+	user-select: none;
+	opacity: var(--canvas-grid-opacity);
+	background-image:
+		linear-gradient(to right, var(--canvas-grid-line) 1px, transparent 1px),
+		linear-gradient(to bottom, var(--canvas-grid-line) 1px, transparent 1px);
+	background-position:
+		var(--canvas-grid-x) var(--canvas-grid-y),
+		var(--canvas-grid-x) var(--canvas-grid-y);
+	background-size: var(--canvas-grid-size) var(--canvas-grid-size);
+	transition: opacity 160ms ease-out;
+}
+
+.canvas-dots {
+	position: absolute;
+	inset: 0;
+	z-index: 1;
+	pointer-events: none;
+	user-select: none;
+	opacity: var(--canvas-dot-opacity);
+	background-image: radial-gradient(
+		circle at center,
+		var(--canvas-dot) var(--canvas-dot-radius),
+		transparent var(--canvas-dot-edge)
+	);
+	background-position: var(--canvas-dot-x) var(--canvas-dot-y);
+	background-size: var(--canvas-dot-grid-width) var(--canvas-dot-grid-height);
+	transition: opacity 160ms ease-out;
+}
+
+.canvas-content {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 2;
+	width: 1440px;
+	height: 1260px;
+	transform-origin: top left;
+	will-change: transform;
+}
+
+.canvas-page.canvas-is-pannable {
+	cursor: grab;
+}
+
+.canvas-page.canvas-is-panning {
+	cursor: grabbing;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.canvas-grid,
+	.canvas-dots {
+		transition: none;
+	}
+}

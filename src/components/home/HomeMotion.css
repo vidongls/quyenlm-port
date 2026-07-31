@@ -1,0 +1,339 @@
+.home-hero__tag {
+	animation: home-tag-in 520ms 160ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.home-hero__title {
+	animation: home-title-in 760ms 250ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.home-hero__title .text-invisible {
+	display: inline-block;
+	animation: home-invisible-breathe 5s 1.4s ease-in-out infinite;
+}
+
+.home-hero__subtitle {
+	animation: home-subtitle-in 620ms 480ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.home-build-sticker {
+	animation:
+		home-build-in 650ms 720ms cubic-bezier(0.34, 1.56, 0.64, 1) both,
+		home-build-float 4.8s 1.5s ease-in-out infinite;
+	transform-origin: center;
+	transition: filter 220ms ease;
+}
+
+.draggable-sticker:hover .home-build-sticker {
+	filter: drop-shadow(4px 6px 0 rgb(30 30 30 / 12%));
+}
+
+.home-decoration__image {
+	opacity: 0;
+	animation:
+		home-decoration-in 650ms calc(360ms + var(--home-item-index) * 85ms)
+		cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
+		home-decoration-float calc(4.8s + var(--home-item-index) * 0.28s)
+		calc(1.4s + var(--home-item-index) * 0.08s) ease-in-out infinite;
+	transform-origin: center;
+	transition:
+		filter 220ms ease,
+		scale 220ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.home-decoration:hover .home-decoration__image {
+	filter: drop-shadow(5px 7px 0 rgb(30 30 30 / 12%));
+	scale: 1.04;
+}
+
+.home-decoration[data-dragging] .home-decoration__image {
+	animation-play-state: paused;
+	filter: drop-shadow(8px 12px 0 rgb(30 30 30 / 15%));
+	scale: 1.06;
+}
+
+.home-project-card,
+.home-about-card,
+.home-time-card,
+.home-experience-sticker,
+.home-toolkit-sticker,
+.home-coffee-sticker {
+	transform-origin: center;
+	transition:
+		transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
+		box-shadow 260ms ease;
+}
+
+.home-project-card {
+	animation: home-project-in 820ms 180ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.draggable-sticker:hover > .home-project-card {
+	box-shadow: 9px 10px 0 rgb(30 30 30 / 14%);
+	transform: rotate(-11deg) translateY(-7px) scale(1.015);
+}
+
+.home-about-card {
+	animation: home-card-in 720ms 620ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.draggable-sticker:hover > .home-about-card {
+	box-shadow: 8px 9px 0 rgb(30 30 30 / 14%);
+	transform: translateY(-6px);
+}
+
+.home-time-card {
+	animation: home-time-in 720ms 520ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.home-time-card:hover {
+	box-shadow: 8px 9px 0 rgb(30 30 30 / 14%);
+	transform: translateY(-5px);
+}
+
+.home-experience-sticker {
+	animation: home-experience-in 650ms 680ms cubic-bezier(0.34, 1.56, 0.64, 1)
+		both;
+}
+
+.draggable-sticker:hover > .home-experience-sticker {
+	box-shadow: 8px 9px 0 rgb(30 30 30 / 14%);
+	transform: rotate(-2deg) translateY(-5px) scale(1.04);
+}
+
+.home-toolkit-sticker {
+	animation: home-toolkit-in 650ms 820ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.draggable-sticker:hover > .home-toolkit-sticker {
+	box-shadow: 8px 9px 0 rgb(30 30 30 / 14%);
+	transform: rotate(4deg) translateY(-5px) scale(1.04);
+}
+
+.home-coffee-sticker {
+	animation:
+		home-coffee-in 600ms 900ms cubic-bezier(0.34, 1.56, 0.64, 1) both,
+		home-coffee-float 4.2s 1.6s ease-in-out infinite;
+}
+
+.draggable-sticker:hover > .home-coffee-sticker {
+	box-shadow: 8px 9px 0 rgb(30 30 30 / 14%);
+	transform: rotate(-4deg) translateY(-4px) scale(1.04);
+}
+
+.draggable-sticker[data-dragging]
+	> :is(
+		.home-project-card,
+		.home-about-card,
+		.home-experience-sticker,
+		.home-toolkit-sticker,
+		.home-coffee-sticker
+	) {
+	box-shadow: 10px 14px 0 rgb(30 30 30 / 14%);
+	scale: 1.035;
+}
+
+@keyframes home-tag-in {
+	from {
+		opacity: 0;
+		transform: translateY(12px) scale(0.72) rotate(-4deg);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0) scale(1) rotate(0);
+	}
+}
+
+@keyframes home-title-in {
+	from {
+		opacity: 0;
+		filter: blur(8px);
+		transform: translateY(30px);
+	}
+
+	to {
+		opacity: 1;
+		filter: blur(0);
+		transform: translateY(0);
+	}
+}
+
+@keyframes home-subtitle-in {
+	from {
+		opacity: 0;
+		transform: translateY(12px);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes home-invisible-breathe {
+	0%,
+	100% {
+		opacity: 1;
+	}
+
+	50% {
+		opacity: 0.45;
+	}
+}
+
+@keyframes home-build-in {
+	from {
+		opacity: 0;
+		transform: rotate(30deg) scale(0.4);
+	}
+
+	to {
+		opacity: 1;
+		transform: rotate(30deg) scale(1);
+	}
+}
+
+@keyframes home-build-float {
+	0%,
+	100% {
+		transform: rotate(30deg) translateY(0);
+	}
+
+	50% {
+		transform: rotate(27deg) translateY(-5px);
+	}
+}
+
+@keyframes home-decoration-in {
+	from {
+		opacity: 0;
+		transform: translateY(18px) scale(0.72) rotate(-5deg);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0) scale(1) rotate(0);
+	}
+}
+
+@keyframes home-decoration-float {
+	0%,
+	100% {
+		transform: translateY(0) rotate(0);
+	}
+
+	50% {
+		transform: translateY(-5px) rotate(1deg);
+	}
+}
+
+@keyframes home-project-in {
+	from {
+		opacity: 0;
+		transform: rotate(-18deg) translateX(-36px) scale(0.94);
+	}
+
+	to {
+		opacity: 1;
+		transform: rotate(-13.86deg) translateX(0) scale(1);
+	}
+}
+
+@keyframes home-card-in {
+	from {
+		opacity: 0;
+		transform: translateY(30px) scale(0.94);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0) scale(1);
+	}
+}
+
+@keyframes home-time-in {
+	from {
+		opacity: 0;
+		transform: translateX(28px) scale(0.96);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateX(0) scale(1);
+	}
+}
+
+@keyframes home-experience-in {
+	from {
+		opacity: 0;
+		transform: rotate(-14deg) scale(0.4);
+	}
+
+	to {
+		opacity: 1;
+		transform: rotate(-6deg) scale(1);
+	}
+}
+
+@keyframes home-toolkit-in {
+	from {
+		opacity: 0;
+		transform: rotate(18deg) scale(0.4);
+	}
+
+	to {
+		opacity: 1;
+		transform: rotate(8deg) scale(1);
+	}
+}
+
+@keyframes home-coffee-in {
+	from {
+		opacity: 0;
+		transform: rotate(-14deg) scale(0.4);
+	}
+
+	to {
+		opacity: 1;
+		transform: rotate(-8deg) scale(1);
+	}
+}
+
+@keyframes home-coffee-float {
+	0%,
+	100% {
+		transform: rotate(-8deg) translateY(0);
+	}
+
+	50% {
+		transform: rotate(-6deg) translateY(-4px);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.home-hero__tag,
+	.home-hero__title,
+	.home-hero__title .text-invisible,
+	.home-hero__subtitle,
+	.home-build-sticker,
+	.home-decoration__image,
+	.home-project-card,
+	.home-about-card,
+	.home-time-card,
+	.home-experience-sticker,
+	.home-toolkit-sticker,
+	.home-coffee-sticker {
+		animation: none;
+	}
+
+	.home-build-sticker,
+	.home-decoration__image,
+	.home-project-card,
+	.home-about-card,
+	.home-time-card,
+	.home-experience-sticker,
+	.home-toolkit-sticker,
+	.home-coffee-sticker {
+		transition: none;
+	}
+}

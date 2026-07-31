@@ -1,0 +1,39 @@
+@import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=JetBrains+Mono:wght@700&family=Manrope:wght@400;500;600;700;800&display=swap");
+@import "./design-tokens.css";
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Bricolage Grotesque", var(--font-sans);
+  --font-code: "JetBrains Mono", ui-monospace, monospace;
+  --font-ui: "SF Pro Display", -apple-system, BlinkMacSystemFont, var(--font-sans);
+  --color-page: var(--color-canvas);
+  --color-ink: var(--color-text-primary);
+  --color-tag: var(--color-badge-background);
+  --color-tag-border: var(--color-badge-border);
+  --color-muted: var(--color-text-secondary);
+  --color-invisible: var(--color-text-invisible);
+  --color-info: var(--color-status-info);
+  --color-brand: var(--color-brand-orange);
+  --color-highlight-blue: var(--color-accent-blue);
+  --color-highlight-yellow: var(--color-accent-yellow);
+  --color-highlight-pink: var(--color-accent-pink);
+  --color-highlight-purple: var(--color-accent-purple);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

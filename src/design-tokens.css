@@ -1,0 +1,52 @@
+:root {
+	/* Brand */
+	--color-brand-orange: #f27021;
+	--color-brand-orange-bright: #ff7921;
+
+	/* Accent */
+	--color-accent-yellow: #ffde55;
+	--color-accent-blue: #18a0fb;
+	--color-accent-coral: #ff7262;
+	--color-accent-green: #4fbf67;
+	--color-accent-purple: #c5a5fc;
+	--color-accent-pink: #ff9fe5;
+	--color-status-success: #21c22d;
+	--color-status-info: #3b82f6;
+
+	/* Text */
+	--color-text-primary: #1e1e1e;
+	--color-text-secondary: #636366;
+	--color-text-on-dark: #ffffff;
+	--color-text-black: #000000;
+	--color-text-gray-800: #333333;
+	--color-text-gray-400: #8a8881;
+	--color-text-warm-black: #201d0f;
+	--color-text-gray-600: #605e54;
+	--color-text-gray-900-alt: #1f1f1f;
+	--color-text-invisible: #d1d1d1;
+
+	/* Background */
+	--color-background-light: #f6f6f6;
+	--color-background-dark: #332f3a;
+	--color-background-gray-100: #f2f2f2;
+	--color-background-gray-200: #e9e8e7;
+	--color-background-gray-250: #e5e5e5;
+	--color-background-gray-300: #d2d2cf;
+	--color-background-gray-350: #75736b;
+	--color-background-gray-25: #f7f7f7;
+
+	/* Surface */
+	--color-surface-blue: #e2f3ff;
+	--color-surface-peach: #ffefda;
+	--color-surface-green: #e4fbea;
+
+	/* Badge */
+	--color-badge-background: #fff8d4;
+	--color-badge-border: #e5e4e0;
+
+	/* Semantic aliases */
+	--color-action-primary: var(--color-brand-orange);
+	--color-action-primary-hover: var(--color-brand-orange-bright);
+	--color-border-default: var(--color-background-gray-200);
+	--color-canvas: var(--color-background-light);
+}

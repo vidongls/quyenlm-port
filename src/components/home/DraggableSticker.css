@@ -1,0 +1,25 @@
+.draggable-sticker {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	background: transparent;
+	color: inherit;
+	font: inherit;
+	text-align: inherit;
+	transform: translate3d(var(--sticker-x), var(--sticker-y), 0);
+	cursor: grab;
+	pointer-events: auto;
+	touch-action: none;
+	user-select: none;
+	will-change: transform;
+}
+
+.draggable-sticker[data-dragging="true"] {
+	z-index: 60;
+	cursor: grabbing;
+}
+
+.draggable-sticker:focus-visible {
+	outline: 3px solid var(--color-status-info);
+	outline-offset: 4px;
+}
