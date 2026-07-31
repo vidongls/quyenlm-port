@@ -32,18 +32,24 @@ type LocationResponse = {
 export default function HomeWidgets() {
 	return (
 		<>
-			<TimeCard />
+			<TimeCard className="absolute top-[227.5px] -right-[300px] z-20" />
 			<ExperienceSticker />
 			<ToolkitSticker />
 		</>
 	);
 }
 
-function TimeCard() {
+type TimeCardProps = {
+	className?: string;
+};
+
+export function TimeCard({ className = "" }: TimeCardProps) {
 	const { date, location, temperature, time } = useLiveConditions();
 
 	return (
-		<aside className="home-time-card absolute top-[227.5px] -right-[300px] z-20 flex w-[283px] flex-col gap-6 rounded-2xl border-2 border-ink bg-white p-3 shadow-[4px_4px_0_rgba(30,30,30,0.15)]">
+		<aside
+			className={`home-time-card flex w-[283px] flex-col gap-6 rounded-2xl border-2 border-ink bg-white p-3 shadow-[4px_4px_0_rgba(30,30,30,0.15)] ${className}`.trim()}
+		>
 			<div className="flex flex-col gap-1">
 				<strong className="font-display text-[32px] leading-[1.2] font-extrabold tracking-[-0.16px] text-ink">
 					{time}

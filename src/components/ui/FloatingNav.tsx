@@ -97,7 +97,7 @@ export default function FloatingNav({
 
 	return (
 		<nav
-			className={`fixed bottom-6 left-1/2 z-50 flex max-w-[calc(100vw-24px)] -translate-x-1/2 items-center gap-2 rounded-[24px] border-2 border-[#1e1e1e] bg-white p-3 shadow-[0_12px_16px_rgba(0,0,0,0.08)] ${className}`.trim()}
+			className={`fixed bottom-3 left-1/2 z-50 flex max-w-[calc(100vw-16px)] -translate-x-1/2 items-center gap-1 rounded-[20px] border-2 border-[#1e1e1e] bg-white p-2 shadow-[0_12px_16px_rgba(0,0,0,0.08)] sm:bottom-6 sm:gap-2 sm:rounded-[24px] sm:p-3 ${className}`.trim()}
 			aria-label="Primary navigation"
 			data-node-id="305:6402"
 		>
@@ -123,7 +123,7 @@ export default function FloatingNav({
 							}}
 							key={item.id}
 							to={item.to}
-							className="nav-item relative z-10 max-sm:!px-3"
+							className="nav-item relative z-10 max-[380px]:!px-2 max-sm:!px-3"
 							data-selected={isSelected || undefined}
 							data-selected-color={item.color}
 							aria-current={isSelected ? "page" : undefined}
