@@ -1,4 +1,5 @@
 import "./WorkPage.css";
+import DraggableSticker from "../home/DraggableSticker";
 
 const SKILLS = [
 	"Figma",
@@ -105,17 +106,27 @@ function ProfileBoard() {
 				<p>Product Designer · Research &amp; Interfaces</p>
 			</article>
 
-			<aside className="work-sticker work-sticker--experience">
-				<strong>5</strong>
-				<span>Years Exp</span>
-			</aside>
+			<DraggableSticker
+				ariaLabel="Move years of experience sticker"
+				className="work-sticker-drag work-sticker-drag--experience"
+			>
+				<aside className="work-sticker work-sticker--experience">
+					<strong>5</strong>
+					<span>Years Exp</span>
+				</aside>
+			</DraggableSticker>
 
-			<aside className="work-sticker work-sticker--tools">
-				<strong>My Daily Kit:</strong>
-				<span>⚡ Figma</span>
-				<span>✨ AI (Research)</span>
-				<span>🎨 Miro / FigJam</span>
-			</aside>
+			<DraggableSticker
+				ariaLabel="Move daily toolkit sticker"
+				className="work-sticker-drag work-sticker-drag--tools"
+			>
+				<aside className="work-sticker work-sticker--tools">
+					<strong>My Daily Kit:</strong>
+					<span>⚡ Figma</span>
+					<span>✨ AI (Research)</span>
+					<span>🎨 Miro / FigJam</span>
+				</aside>
+			</DraggableSticker>
 		</div>
 	);
 }

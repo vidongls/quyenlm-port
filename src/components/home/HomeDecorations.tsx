@@ -1,20 +1,27 @@
 import DraggableSticker from "./DraggableSticker";
+import HoverLottieSticker from "./HoverLottieSticker";
 
 const DECORATIONS = [
 	{
 		src: "/assets/home-wave.png",
+		lottieSrc: "/assets/lottie/avatar_v2.lottie",
+		replaceStatic: true,
 		alt: "Quyen waving",
-		className: "left-[620px] top-[213.8px] size-[200px] rounded-2xl",
+		className: "left-[520px] top-[213.8px] h-[200px] w-[400px] rounded-2xl",
 	},
 	{
 		src: "/assets/home-coffee.png",
+		lottieSrc: "/assets/lottie/Coffee_Avatar.lottie",
+		replaceStatic: true,
 		alt: "Quyen pouring coffee",
-		className: "left-[1057.3px] top-[412px] size-[200px] rounded-2xl",
+		className: "left-[1057.3px] top-[412px] h-[200px] w-[460px] rounded-2xl",
 	},
 	{
 		src: "/assets/home-laptop.png",
+		lottieSrc: "/assets/lottie/Insight_Avatar.lottie",
+		replaceStatic: true,
 		alt: "Quyen working with a laptop",
-		className: "left-[341.44px] top-[652.6px] size-[200px]",
+		className: "left-[341.44px] top-[652.6px] h-[200px] w-[450px]",
 	},
 	{
 		src: "/assets/home-magnifier.png",
@@ -28,6 +35,7 @@ const DECORATIONS = [
 	},
 	{
 		src: "/assets/home-pen.png",
+		lottieSrc: "/assets/lottie/home-pen-hover.json",
 		alt: "",
 		className: "left-[898.56px] top-[-22.77px] size-[160px] rounded-2xl",
 	},
@@ -43,21 +51,37 @@ export default function HomeDecorations() {
 		<div className="pointer-events-none absolute inset-0 z-10 select-none">
 			{DECORATIONS.map((item, index) => (
 				<DraggableSticker
-					key={item.src}
+					key={"lottieSrc" in item ? item.lottieSrc : item.src}
 					ariaLabel={`Move ${item.alt || "decorative sticker"}`}
 					className={`home-decoration absolute ${item.className}`}
 				>
-					<img
-						src={item.src}
-						alt={item.alt}
-						className="home-decoration__image size-full object-cover"
+					<span
+						className="home-decoration__image block size-full"
 						style={
 							{
 								"--home-item-index": index,
 							} as React.CSSProperties
 						}
-						draggable={false}
-					/>
+					>
+						{"lottieSrc" in item ? (
+							<HoverLottieSticker
+								alt={item.alt}
+								fallbackSrc={
+									"replaceStatic" in item && item.replaceStatic
+										? undefined
+										: item.src
+								}
+								lottieSrc={item.lottieSrc}
+							/>
+						) : (
+							<img
+								src={item.src}
+								alt={item.alt}
+								className="size-full object-cover"
+								draggable={false}
+							/>
+						)}
+					</span>
 				</DraggableSticker>
 			))}
 		</div>

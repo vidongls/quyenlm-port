@@ -25,6 +25,10 @@
 	animation: work-profile-in 800ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
+.work-profile:has(.work-sticker-drag:is([data-dragging], [data-moved])) {
+	z-index: 40;
+}
+
 .work-profile__stamp,
 .work-kicker {
 	display: inline-flex;
@@ -93,8 +97,7 @@
 }
 
 .work-sticker {
-	position: absolute;
-	z-index: 3;
+	position: relative;
 	display: flex;
 	flex-direction: column;
 	border: 3px solid var(--color-text-primary);
@@ -103,9 +106,17 @@
 	animation: work-sticker-pop 600ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
 
-.work-sticker--experience {
+.work-sticker-drag {
+	position: absolute;
+	z-index: 3;
+}
+
+.work-sticker-drag--experience {
 	bottom: 11px;
 	left: -4px;
+}
+
+.work-sticker--experience {
 	width: 160px;
 	gap: 8px;
 	padding: 16px;
@@ -127,9 +138,12 @@
 	font: 700 12px / 1.2 var(--font-code);
 }
 
-.work-sticker--tools {
+.work-sticker-drag--tools {
 	right: 0;
 	bottom: 4px;
+}
+
+.work-sticker--tools {
 	width: 180px;
 	gap: 7px;
 	padding: 16px;
@@ -142,6 +156,11 @@
 
 .work-sticker--tools:hover {
 	transform: rotate(-6deg) scale(1.05);
+}
+
+.work-sticker-drag[data-dragging] .work-sticker {
+	box-shadow: 9px 12px 0 rgb(30 30 30 / 15%);
+	scale: 1.05;
 }
 
 .work-sticker--tools strong,
@@ -246,11 +265,6 @@
 	transition:
 		transform 200ms ease,
 		background-color 200ms ease;
-}
-
-.work-badge:hover {
-	background: var(--color-accent-yellow);
-	transform: translateY(-3px) rotate(-1deg);
 }
 
 .work-timeline {
@@ -550,13 +564,19 @@
 		left: 0;
 	}
 
-	.work-sticker--experience {
+	.work-sticker-drag--experience {
 		left: 0;
+	}
+
+	.work-sticker--experience {
 		width: 132px;
 	}
 
-	.work-sticker--tools {
+	.work-sticker-drag--tools {
 		right: 0;
+	}
+
+	.work-sticker--tools {
 		width: 156px;
 	}
 

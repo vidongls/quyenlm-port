@@ -37,6 +37,7 @@ export default function DraggableSticker({
 	const [offset, setOffset] = useState<Point>({ x: 0, y: 0 });
 	const [isDragging, setIsDragging] = useState(false);
 	const dragStart = useRef<DragStart | null>(null);
+	const hasMoved = offset.x !== 0 || offset.y !== 0;
 
 	function handlePointerDown(event: PointerEvent<HTMLDivElement>) {
 		if (event.pointerType === "mouse" && event.button !== 0) return;
@@ -127,6 +128,7 @@ export default function DraggableSticker({
 				} as CSSProperties
 			}
 			data-dragging={isDragging || undefined}
+			data-moved={hasMoved || undefined}
 			data-draggable-sticker
 			role="application"
 			tabIndex={0}

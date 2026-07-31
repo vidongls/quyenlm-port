@@ -43,7 +43,7 @@ function TimeCard() {
 	const { date, location, temperature, time } = useLiveConditions();
 
 	return (
-		<aside className="home-time-card absolute top-[227.5px] -right-[300px] z-20 flex w-[283px] flex-col gap-6 rounded-2xl border-2 border-ink bg-white p-4 shadow-[4px_4px_0_rgba(30,30,30,0.15)]">
+		<aside className="home-time-card absolute top-[227.5px] -right-[300px] z-20 flex w-[283px] flex-col gap-6 rounded-2xl border-2 border-ink bg-white p-3 shadow-[4px_4px_0_rgba(30,30,30,0.15)]">
 			<div className="flex flex-col gap-1">
 				<strong className="font-display text-[32px] leading-[1.2] font-extrabold tracking-[-0.16px] text-ink">
 					{time}
@@ -61,7 +61,7 @@ function TimeCard() {
 			>
 				<span className="flex items-center gap-1.5">
 					<img src="/assets/home-map-pin.svg" alt="" className="size-3.5" />
-					<span className="max-w-[145px] truncate">{location}</span>
+					<span className="max-w-[145px] truncate text-sm">{location}</span>
 				</span>
 				<a
 					href="https://open-meteo.com/"
