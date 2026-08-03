@@ -1,4 +1,5 @@
 import DraggableSticker from "./DraggableSticker";
+import InvisibleDesignEffect from "./InvisibleDesignEffect";
 import RotatingTypewriter from "./RotatingTypewriter";
 
 export default function HomeHero() {
@@ -17,7 +18,7 @@ export default function HomeHero() {
 			</DraggableSticker>
 
 			<h1 className="home-hero__title w-full font-display text-[88px] leading-[1.05] font-extrabold tracking-[-0.88px] text-ink">
-				Good Design&apos;s <span className="text-invisible">Invisible</span>
+				Good Design&apos;s <InvisibleDesignEffect />
 			</h1>
 
 			<p className="home-hero__subtitle flex w-full items-center justify-center font-code text-[13px] leading-normal font-bold whitespace-nowrap text-muted">

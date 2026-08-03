@@ -38,6 +38,7 @@ export default function DraggableSticker({
 	const [isDragging, setIsDragging] = useState(false);
 	const dragStart = useRef<DragStart | null>(null);
 	const hasMoved = offset.x !== 0 || offset.y !== 0;
+	const layerLabel = ariaLabel.replace(/^Move\s+/i, "");
 
 	function handlePointerDown(event: PointerEvent<HTMLDivElement>) {
 		if (event.pointerType === "mouse" && event.button !== 0) return;
@@ -139,6 +140,29 @@ export default function DraggableSticker({
 			onPointerCancel={handlePointerEnd}
 			onKeyDown={handleKeyDown}
 		>
+			<span className="draggable-sticker__selection-frame" aria-hidden="true">
+				<svg
+					className="draggable-sticker__selection-outline"
+					viewBox="0 0 100 100"
+					preserveAspectRatio="none"
+					aria-hidden="true"
+					focusable="false"
+				>
+					<rect
+						x="0.75"
+						y="0.75"
+						width="98.5"
+						height="98.5"
+						pathLength="1"
+						vectorEffect="non-scaling-stroke"
+					/>
+				</svg>
+				<span className="draggable-sticker__selection-label">{layerLabel}</span>
+				<i className="draggable-sticker__selection-handle draggable-sticker__selection-handle--tl" />
+				<i className="draggable-sticker__selection-handle draggable-sticker__selection-handle--tr" />
+				<i className="draggable-sticker__selection-handle draggable-sticker__selection-handle--bl" />
+				<i className="draggable-sticker__selection-handle draggable-sticker__selection-handle--br" />
+			</span>
 			{children}
 		</div>
 	);

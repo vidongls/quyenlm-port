@@ -2,10 +2,10 @@
 	position: fixed;
 	top: 0;
 	left: 0;
-	z-index: 100;
+	z-index: 1100;
 	pointer-events: none;
 	opacity: 0;
-	transition: opacity 120ms ease-out;
+	transition: opacity 100ms ease-out;
 	will-change: transform;
 }
 
@@ -13,43 +13,230 @@
 	opacity: 1;
 }
 
-.custom-cursor__content {
-	display: flex;
-	align-items: center;
-	gap: 2px;
-	transform-origin: 0 0;
-	transition: transform 160ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.custom-cursor__pointer {
+.custom-cursor__tool {
+	position: absolute;
+	top: 0;
+	left: 0;
 	width: 18px;
 	height: 18px;
-	flex: none;
-}
-
-.custom-cursor__label {
-	padding: 4px 8px;
-	border-radius: 4px;
-	background: #3b82f6;
-	color: #fff;
-	font-family: var(--font-ui);
-	font-size: 13px;
-	font-weight: 600;
-	line-height: 1.4;
-	letter-spacing: -0.065px;
-	white-space: nowrap;
+	border: 1.5px solid transparent;
+	border-radius: 50%;
+	background: rgb(246 246 246 / 72%);
+	box-shadow: 0 2px 8px rgb(30 30 30 / 8%);
+	transform: translate(-50%, -50%) rotate(0);
 	transition:
+		width 200ms cubic-bezier(0.34, 1.56, 0.64, 1),
+		height 200ms cubic-bezier(0.34, 1.56, 0.64, 1),
+		border-color 160ms ease,
+		border-radius 160ms ease,
 		background-color 160ms ease,
-		box-shadow 160ms ease;
+		box-shadow 160ms ease,
+		transform 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.custom-cursor[data-interactive="true"] .custom-cursor__content {
-	transform: scale(1.06);
-}
-
-.custom-cursor[data-interactive="true"] .custom-cursor__label {
+.custom-cursor__core {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 5px;
+	height: 5px;
+	border-radius: 50%;
 	background: var(--color-text-primary);
-	box-shadow: 3px 3px 0 rgba(30, 30, 30, 0.15);
+	transform: translate(-50%, -50%);
+	transition:
+		width 160ms ease,
+		height 160ms ease,
+		border-radius 160ms ease,
+		background-color 160ms ease;
+}
+
+.custom-cursor__axis {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	background: rgb(30 30 30 / 42%);
+	transform: translate(-50%, -50%);
+	transition: opacity 120ms ease;
+}
+
+.custom-cursor__axis--x {
+	width: 26px;
+	height: 1px;
+}
+
+.custom-cursor__axis--y {
+	width: 1px;
+	height: 26px;
+}
+
+.custom-cursor__handle {
+	position: absolute;
+	width: 6px;
+	height: 6px;
+	border: 1.5px solid var(--color-status-info);
+	background: white;
+	opacity: 0;
+	transform: scale(0);
+	transition:
+		opacity 120ms ease,
+		transform 180ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.custom-cursor__handle--tl {
+	top: -4px;
+	left: -4px;
+}
+
+.custom-cursor__handle--tr {
+	top: -4px;
+	right: -4px;
+}
+
+.custom-cursor__handle--bl {
+	bottom: -4px;
+	left: -4px;
+}
+
+.custom-cursor__handle--br {
+	right: -4px;
+	bottom: -4px;
+}
+
+.custom-cursor__action-icon {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 15px;
+	height: 15px;
+	opacity: 0;
+	stroke: white;
+	stroke-width: 1.8;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+	transform: translate(-50%, -50%) scale(0.6);
+	transition:
+		opacity 140ms ease,
+		transform 180ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.custom-cursor__drag-hint {
+	position: absolute;
+	top: 19px;
+	left: 19px;
+	display: flex;
+	align-items: center;
+	gap: 7px;
+	min-height: 28px;
+	border: 1.5px solid var(--color-text-primary);
+	border-radius: 6px;
+	background: var(--color-accent-yellow);
+	box-shadow: 3px 4px 0 rgb(30 30 30 / 14%);
+	padding: 5px 9px;
+	opacity: 0;
+	font: 700 10px / 1 var(--font-code);
+	letter-spacing: 0.01em;
+	white-space: nowrap;
+	transform: translate(-6px, -6px) scale(0.78);
+	transform-origin: top left;
+	transition:
+		opacity 140ms ease,
+		transform 200ms cubic-bezier(0.34, 1.56, 0.64, 1),
+		background-color 160ms ease,
+		color 160ms ease;
+}
+
+.custom-cursor__grip {
+	display: grid;
+	grid-template-columns: repeat(2, 3px);
+	gap: 2px;
+}
+
+.custom-cursor__grip i {
+	width: 3px;
+	height: 3px;
+	border-radius: 50%;
+	background: currentColor;
+}
+
+.custom-cursor__hint-active {
+	display: none;
+}
+
+.custom-cursor[data-mode="action"] .custom-cursor__tool {
+	width: 30px;
+	height: 30px;
+	border-color: var(--color-text-primary);
+	background: var(--color-text-primary);
+	box-shadow: 3px 4px 0 rgb(30 30 30 / 14%);
+}
+
+.custom-cursor[data-mode="action"]
+	:is(.custom-cursor__axis, .custom-cursor__core) {
+	opacity: 0;
+}
+
+.custom-cursor[data-mode="action"] .custom-cursor__action-icon {
+	opacity: 1;
+	transform: translate(-50%, -50%) scale(1);
+}
+
+.custom-cursor:is([data-mode="drag"], [data-mode="dragging"])
+	.custom-cursor__tool {
+	width: 38px;
+	height: 38px;
+	border-color: var(--color-status-info);
+	border-radius: 3px;
+	background: rgb(59 130 246 / 7%);
+	box-shadow: 0 0 0 1px rgb(255 255 255 / 72%);
+}
+
+.custom-cursor:is([data-mode="drag"], [data-mode="dragging"])
+	.custom-cursor__axis {
+	opacity: 0;
+}
+
+.custom-cursor:is([data-mode="drag"], [data-mode="dragging"])
+	.custom-cursor__core {
+	width: 7px;
+	height: 7px;
+	background: var(--color-status-info);
+}
+
+.custom-cursor:is([data-mode="drag"], [data-mode="dragging"])
+	.custom-cursor__handle {
+	opacity: 1;
+	transform: scale(1);
+}
+
+.custom-cursor:is([data-mode="drag"], [data-mode="dragging"])
+	.custom-cursor__drag-hint {
+	opacity: 1;
+	transform: translate(0, 0) scale(1);
+}
+
+.custom-cursor[data-mode="dragging"] .custom-cursor__tool {
+	width: 44px;
+	height: 44px;
+	background: rgb(255 222 85 / 22%);
+	transform: translate(-50%, -50%) rotate(4deg);
+}
+
+.custom-cursor[data-mode="dragging"] .custom-cursor__core {
+	border-radius: 2px;
+	background: var(--color-text-primary);
+}
+
+.custom-cursor[data-mode="dragging"] .custom-cursor__drag-hint {
+	background: var(--color-text-primary);
+	color: white;
+}
+
+.custom-cursor[data-mode="dragging"] .custom-cursor__hint-idle {
+	display: none;
+}
+
+.custom-cursor[data-mode="dragging"] .custom-cursor__hint-active {
+	display: inline;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -66,12 +253,13 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-	.custom-cursor {
-		transition: none;
-	}
-
-	.custom-cursor__content,
-	.custom-cursor__label {
+	.custom-cursor,
+	.custom-cursor__tool,
+	.custom-cursor__core,
+	.custom-cursor__axis,
+	.custom-cursor__handle,
+	.custom-cursor__action-icon,
+	.custom-cursor__drag-hint {
 		transition: none;
 	}
 }

@@ -26,11 +26,6 @@
 	animation: home-title-in 760ms 250ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-.home-hero__title .text-invisible {
-	display: inline-block;
-	animation: home-invisible-breathe 5s 1.4s ease-in-out infinite;
-}
-
 .home-hero__subtitle {
 	animation: home-subtitle-in 620ms 480ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
@@ -304,17 +299,6 @@
 	}
 }
 
-@keyframes home-invisible-breathe {
-	0%,
-	100% {
-		opacity: 1;
-	}
-
-	50% {
-		opacity: 0.45;
-	}
-}
-
 @keyframes home-build-in {
 	from {
 		opacity: 0;
@@ -447,7 +431,6 @@
 @media (prefers-reduced-motion: reduce) {
 	.home-hero__tag,
 	.home-hero__title,
-	.home-hero__title .text-invisible,
 	.home-hero__subtitle,
 	.home-build-sticker,
 	.home-decoration__image,
