@@ -59,8 +59,9 @@ export default function FloatingNav({
 	const pathname = useRouterState({
 		select: (state) => state.location.pathname,
 	});
-	const routeItem =
-		NAV_ITEMS.find((item) => item.to === pathname)?.id ?? "home";
+	const routeItem = pathname.startsWith("/projects/")
+		? "work"
+		: (NAV_ITEMS.find((item) => item.to === pathname)?.id ?? "home");
 	const selectedItem = activeItem ?? routeItem;
 	const selectedColor =
 		NAV_ITEMS.find((item) => item.id === selectedItem)?.color ?? "black";

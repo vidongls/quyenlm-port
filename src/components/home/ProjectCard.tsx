@@ -55,7 +55,7 @@ export default function ProjectCard() {
 
 					<div className="flex w-full items-center justify-between pt-3">
 						<Link
-							to="/work"
+							to="/projects/fintech-hub"
 							className="font-ui text-sm leading-[1.4] font-semibold tracking-[-0.07px] text-highlight-blue focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-highlight-blue"
 						>
 							Open Board →

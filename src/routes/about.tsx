@@ -11,6 +11,7 @@ const PROJECTS = [
 		description:
 			"An AI-powered micro-investment platform built specifically for the Gen-Z market in Southeast Asia, simplifying automated savings.",
 		featured: true,
+		href: "/projects/fintech-hub",
 	},
 	{
 		title: "Hanoi Transit: Route Planner",

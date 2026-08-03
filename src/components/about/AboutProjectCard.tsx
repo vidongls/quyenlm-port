@@ -3,6 +3,7 @@ import { Link } from "@tanstack/react-router";
 export type AboutProjectCardProps = {
 	description: string;
 	featured?: boolean;
+	href?: "/projects/fintech-hub" | "/work";
 	tag: string;
 	title: string;
 };
@@ -10,6 +11,7 @@ export type AboutProjectCardProps = {
 export default function AboutProjectCard({
 	description,
 	featured = false,
+	href = "/work",
 	tag,
 	title,
 }: AboutProjectCardProps) {
@@ -45,7 +47,7 @@ export default function AboutProjectCard({
 
 			<div className="mt-auto flex w-full items-center justify-between pt-3">
 				<Link
-					to="/work"
+					to={href}
 					className="about-project-card__link font-ui text-sm leading-[1.4] font-semibold tracking-[-0.07px] text-highlight-blue focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-highlight-blue"
 				>
 					Open Board <span aria-hidden="true">→</span>
