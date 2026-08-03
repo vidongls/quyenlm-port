@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { TimeCard } from "./HomeWidgets";
 import HoverLottieSticker from "./HoverLottieSticker";
+import InvisibleDesignEffect from "./InvisibleDesignEffect";
 import RotatingTypewriter from "./RotatingTypewriter";
 import "./HomeResponsive.css";
 
@@ -23,8 +24,7 @@ export default function HomeMobile() {
 				</div>
 
 				<h1 id="home-mobile-title">
-					Good Design&apos;s{" "}
-					<span className="home-mobile__invisible">Invisible</span>
+					Good Design&apos;s <InvisibleDesignEffect />
 				</h1>
 
 				<p className="home-mobile__subtitle">

@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./ProjectDetailPage.css";
 
 const PROJECT_META = [
@@ -122,8 +122,46 @@ function SavingsSimulator() {
 }
 
 export default function ProjectDetailPage() {
+	const pageRef = useRef<HTMLElement>(null);
+
+	useEffect(() => {
+		const page = pageRef.current;
+		if (!page) return;
+
+		const revealItems = Array.from(
+			page.querySelectorAll<HTMLElement>(".project-detail__reveal"),
+		);
+		const prefersReducedMotion = window.matchMedia(
+			"(prefers-reduced-motion: reduce)",
+		).matches;
+
+		if (prefersReducedMotion || !("IntersectionObserver" in window)) {
+			for (const item of revealItems) item.dataset.revealed = "true";
+			return;
+		}
+
+		page.dataset.motionReady = "true";
+		const observer = new IntersectionObserver(
+			(entries) => {
+				for (const entry of entries) {
+					if (!entry.isIntersecting) continue;
+					(entry.target as HTMLElement).dataset.revealed = "true";
+					observer.unobserve(entry.target);
+				}
+			},
+			{
+				rootMargin: "0px 0px -10%",
+				threshold: 0.12,
+			},
+		);
+
+		for (const item of revealItems) observer.observe(item);
+
+		return () => observer.disconnect();
+	}, []);
+
 	return (
-		<main className="project-detail" data-page="project-detail">
+		<main ref={pageRef} className="project-detail" data-page="project-detail">
 			<section className="project-detail__hero" aria-labelledby="project-title">
 				<div className="project-detail__hero-copy">
 					<Link to="/about" className="project-detail__back">
