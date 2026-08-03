@@ -1,7 +1,12 @@
 import { TanStackDevtools } from "@tanstack/react-devtools";
 import { createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
-import { CustomCursor, FloatingNav, SiteHeader } from "../components/ui";
+import {
+	CustomCursor,
+	FloatingNav,
+	SiteHeader,
+	SitePreloader,
+} from "../components/ui";
 
 import appCss from "../styles.css?url";
 
@@ -36,9 +41,12 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 				<HeadContent />
 			</head>
 			<body className="bg-page text-ink font-sans antialiased [overflow-wrap:anywhere]">
-				{children}
-				<SiteHeader />
-				<FloatingNav />
+				<div className="site-shell">
+					{children}
+					<SiteHeader />
+					<FloatingNav />
+				</div>
+				<SitePreloader />
 				<CustomCursor />
 				<TanStackDevtools
 					config={{

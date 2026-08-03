@@ -19,6 +19,10 @@
 	cursor: grabbing;
 }
 
+.draggable-sticker[data-moved]:not([data-dragging="true"]) {
+	z-index: 40;
+}
+
 .draggable-sticker:focus-visible {
 	outline: 3px solid var(--color-status-info);
 	outline-offset: 4px;

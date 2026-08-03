@@ -32,7 +32,12 @@ type LocationResponse = {
 export default function HomeWidgets() {
 	return (
 		<>
-			<TimeCard className="absolute top-[227.5px] -right-[300px] z-20" />
+			<DraggableSticker
+				ariaLabel="Move live time and weather card"
+				className="home-time-card-drag absolute top-[227.5px] -right-[300px] z-20"
+			>
+				<TimeCard />
+			</DraggableSticker>
 			<ExperienceSticker />
 			<ToolkitSticker />
 		</>

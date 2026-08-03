@@ -25,7 +25,12 @@
 	animation: work-profile-in 800ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-.work-profile:has(.work-sticker-drag:is([data-dragging], [data-moved])) {
+.work-profile:has(
+		:is(.work-sticker-drag, .work-profile-stamp-drag):is(
+				[data-dragging],
+				[data-moved]
+			)
+	) {
 	z-index: 40;
 }
 
@@ -40,12 +45,30 @@
 }
 
 .work-profile__stamp {
+	position: relative;
+	border: 2px solid var(--color-text-primary);
+	transform: rotate(-1deg);
+	transition:
+		transform 220ms cubic-bezier(0.34, 1.56, 0.64, 1),
+		box-shadow 220ms ease;
+}
+
+.work-profile-stamp-drag {
 	position: absolute;
 	z-index: 4;
 	top: -14px;
 	left: -8px;
-	border: 2px solid var(--color-text-primary);
-	transform: rotate(-1deg);
+}
+
+.work-profile-stamp-drag[data-dragging] .work-profile__stamp {
+	box-shadow: 5px 7px 0 rgb(30 30 30 / 14%);
+	transform: rotate(1deg) translateY(-4px);
+	scale: 1.08;
+}
+
+.work-profile-stamp-drag:hover .work-profile__stamp {
+	box-shadow: 4px 5px 0 rgb(30 30 30 / 13%);
+	transform: rotate(-4deg) translateY(-3px) scale(1.05);
 }
 
 .work-polaroid {
@@ -560,7 +583,7 @@
 		text-overflow: ellipsis;
 	}
 
-	.work-profile__stamp {
+	.work-profile-stamp-drag {
 		left: 0;
 	}
 
@@ -614,6 +637,7 @@
 	}
 
 	.work-polaroid,
+	.work-profile__stamp,
 	.work-sticker,
 	.work-credentials,
 	.work-badge,

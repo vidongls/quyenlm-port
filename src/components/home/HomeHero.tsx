@@ -7,9 +7,14 @@ export default function HomeHero() {
 			className="home-hero absolute top-[370px] left-[324.5px] z-20 flex w-[791px] flex-col items-center gap-4 text-center"
 			data-node-id="309:7981"
 		>
-			<p className="home-hero__tag rounded-full bg-highlight-yellow px-2.5 py-1 font-ui text-xs leading-[1.4] font-bold text-ink">
-				Product Designer · Research &amp; Interfaces
-			</p>
+			<DraggableSticker
+				ariaLabel="Move Product Designer role sticker"
+				className="home-role-tag-drag"
+			>
+				<p className="home-hero__tag rounded-full bg-highlight-yellow px-2.5 py-1 font-ui text-xs leading-[1.4] font-bold text-ink">
+					Product Designer · Research &amp; Interfaces
+				</p>
+			</DraggableSticker>
 
 			<h1 className="home-hero__title w-full font-display text-[88px] leading-[1.05] font-extrabold tracking-[-0.88px] text-ink">
 				Good Design&apos;s <span className="text-invisible">Invisible</span>

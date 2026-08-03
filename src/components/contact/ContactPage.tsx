@@ -1,4 +1,5 @@
 import { type FormEvent, useState } from "react";
+import DraggableSticker from "../home/DraggableSticker";
 import "./ContactPage.css";
 
 export default function ContactPage() {
@@ -39,10 +40,15 @@ export default function ContactPage() {
 						</div>
 					</article>
 
-					<div className="contact-sticker" aria-hidden="true">
-						<span>👋</span>
-						Talk soon!
-					</div>
+					<DraggableSticker
+						ariaLabel="Move Talk soon sticker"
+						className="contact-sticker-drag"
+					>
+						<div className="contact-sticker">
+							<span aria-hidden="true">👋</span>
+							Talk soon!
+						</div>
+					</DraggableSticker>
 
 					<div className="contact-social">
 						<p>{"// FIND ME AROUND THE WEB"}</p>

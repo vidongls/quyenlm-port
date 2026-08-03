@@ -93,7 +93,12 @@ const INTERESTS = [
 function ProfileBoard() {
 	return (
 		<div className="work-profile">
-			<span className="work-profile__stamp">BUILD &amp; SHIP</span>
+			<DraggableSticker
+				ariaLabel="Move Build and Ship sticker"
+				className="work-profile-stamp-drag"
+			>
+				<span className="work-profile__stamp">BUILD &amp; SHIP</span>
+			</DraggableSticker>
 
 			<article className="work-polaroid">
 				<div className="work-polaroid__photo">
