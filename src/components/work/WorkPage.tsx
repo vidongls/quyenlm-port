@@ -279,9 +279,9 @@ function Philosophy() {
 export default function WorkPage() {
 	return (
 		<main
-			id="work"
+			id="about"
 			className="work-page"
-			data-page="work"
+			data-page="about"
 			data-node-id="309:6600"
 		>
 			<div className="work-page__inner">

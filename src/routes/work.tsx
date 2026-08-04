@@ -1,4 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import WorkPage from "../components/work/WorkPage";
+import SelectedWorkPage from "../components/work/SelectedWorkPage";
 
-export const Route = createFileRoute("/work")({ component: WorkPage });
+export const Route = createFileRoute("/work")({ component: SelectedWorkPage });

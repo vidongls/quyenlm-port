@@ -157,7 +157,8 @@ export default function CanvasGrid({ children }: CanvasGridProps) {
 				'a, button, input, textarea, select, [role="button"], [data-draggable-sticker]',
 			);
 			const canPanWithMouse =
-				event.button === 1 || (event.button === 0 && spacePressed.current);
+				event.button === 1 ||
+				(event.button === 0 && (spacePressed.current || !isInteractive));
 			if ((!isTouch && !canPanWithMouse) || (isTouch && isInteractive)) return;
 
 			event.preventDefault();

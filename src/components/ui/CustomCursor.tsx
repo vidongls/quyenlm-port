@@ -5,10 +5,17 @@ import {
 	type CustomCursorMoveDetail,
 } from "./customCursorEvents";
 
-type CursorMode = "default" | "action" | "drag" | "dragging";
+type CursorMode =
+	| "default"
+	| "action"
+	| "drag"
+	| "dragging"
+	| "pan"
+	| "panning";
 
 const ACTION_SELECTOR = "a, button, input, select, textarea, [role='button']";
 const DRAG_SELECTOR = "[data-draggable-sticker]";
+const CANVAS_SELECTOR = ".canvas-page";
 
 function getCursorMode(target: Element | null): CursorMode {
 	if (!target) return "default";
@@ -23,7 +30,14 @@ function getCursorMode(target: Element | null): CursorMode {
 		return draggable.hasAttribute("data-dragging") ? "dragging" : "drag";
 	}
 
-	return action ? "action" : "default";
+	if (action) return "action";
+
+	const canvas = target.closest(CANVAS_SELECTOR);
+	if (canvas) {
+		return canvas.classList.contains("canvas-is-panning") ? "panning" : "pan";
+	}
+
+	return "default";
 }
 
 export default function CustomCursor() {
@@ -75,7 +89,7 @@ export default function CustomCursor() {
 		function handlePointerDown(event: PointerEvent) {
 			if (!finePointer.matches || event.pointerType === "touch") return;
 			const mode = getCursorMode(event.target as Element | null);
-			setMode(mode === "drag" ? "dragging" : mode);
+			setMode(mode === "drag" ? "dragging" : mode === "pan" ? "panning" : mode);
 		}
 
 		function handlePointerEnd(event: PointerEvent) {
@@ -172,6 +186,8 @@ export default function CustomCursor() {
 				</span>
 				<span className="custom-cursor__hint-idle">HOLD + DRAG</span>
 				<span className="custom-cursor__hint-active">MOVING</span>
+				<span className="custom-cursor__hint-pan">DRAG CANVAS</span>
+				<span className="custom-cursor__hint-panning">PANNING</span>
 			</div>
 		</div>
 	);

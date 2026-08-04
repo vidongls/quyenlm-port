@@ -158,7 +158,9 @@
 	background: currentColor;
 }
 
-.custom-cursor__hint-active {
+.custom-cursor__hint-active,
+.custom-cursor__hint-pan,
+.custom-cursor__hint-panning {
 	display: none;
 }
 
@@ -180,7 +182,12 @@
 	transform: translate(-50%, -50%) scale(1);
 }
 
-.custom-cursor:is([data-mode="drag"], [data-mode="dragging"])
+.custom-cursor:is(
+		[data-mode="drag"],
+		[data-mode="dragging"],
+		[data-mode="pan"],
+		[data-mode="panning"]
+	)
 	.custom-cursor__tool {
 	width: 38px;
 	height: 38px;
@@ -190,43 +197,66 @@
 	box-shadow: 0 0 0 1px rgb(255 255 255 / 72%);
 }
 
-.custom-cursor:is([data-mode="drag"], [data-mode="dragging"])
+.custom-cursor:is(
+		[data-mode="drag"],
+		[data-mode="dragging"],
+		[data-mode="pan"],
+		[data-mode="panning"]
+	)
 	.custom-cursor__axis {
 	opacity: 0;
 }
 
-.custom-cursor:is([data-mode="drag"], [data-mode="dragging"])
+.custom-cursor:is(
+		[data-mode="drag"],
+		[data-mode="dragging"],
+		[data-mode="pan"],
+		[data-mode="panning"]
+	)
 	.custom-cursor__core {
 	width: 7px;
 	height: 7px;
 	background: var(--color-status-info);
 }
 
-.custom-cursor:is([data-mode="drag"], [data-mode="dragging"])
+.custom-cursor:is(
+		[data-mode="drag"],
+		[data-mode="dragging"],
+		[data-mode="pan"],
+		[data-mode="panning"]
+	)
 	.custom-cursor__handle {
 	opacity: 1;
 	transform: scale(1);
 }
 
-.custom-cursor:is([data-mode="drag"], [data-mode="dragging"])
+.custom-cursor:is(
+		[data-mode="drag"],
+		[data-mode="dragging"],
+		[data-mode="pan"],
+		[data-mode="panning"]
+	)
 	.custom-cursor__drag-hint {
 	opacity: 1;
 	transform: translate(0, 0) scale(1);
 }
 
-.custom-cursor[data-mode="dragging"] .custom-cursor__tool {
+.custom-cursor:is([data-mode="dragging"], [data-mode="panning"])
+	.custom-cursor__tool {
 	width: 44px;
 	height: 44px;
 	background: rgb(255 222 85 / 22%);
 	transform: translate(-50%, -50%) rotate(4deg);
 }
 
-.custom-cursor[data-mode="dragging"] .custom-cursor__core {
+.custom-cursor:is([data-mode="dragging"], [data-mode="panning"])
+	.custom-cursor__core {
 	border-radius: 2px;
 	background: var(--color-text-primary);
 }
 
-.custom-cursor[data-mode="dragging"] .custom-cursor__drag-hint {
+.custom-cursor:is([data-mode="dragging"], [data-mode="panning"])
+	.custom-cursor__drag-hint {
 	background: var(--color-text-primary);
 	color: white;
 }
@@ -236,6 +266,16 @@
 }
 
 .custom-cursor[data-mode="dragging"] .custom-cursor__hint-active {
+	display: inline;
+}
+
+.custom-cursor:is([data-mode="pan"], [data-mode="panning"])
+	:is(.custom-cursor__hint-idle, .custom-cursor__hint-active) {
+	display: none;
+}
+
+.custom-cursor[data-mode="pan"] .custom-cursor__hint-pan,
+.custom-cursor[data-mode="panning"] .custom-cursor__hint-panning {
 	display: inline;
 }
 

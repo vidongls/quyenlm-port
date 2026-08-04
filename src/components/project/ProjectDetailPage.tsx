@@ -164,7 +164,7 @@ export default function ProjectDetailPage() {
 		<main ref={pageRef} className="project-detail" data-page="project-detail">
 			<section className="project-detail__hero" aria-labelledby="project-title">
 				<div className="project-detail__hero-copy">
-					<Link to="/about" className="project-detail__back">
+					<Link to="/work" className="project-detail__back">
 						<ArrowIcon />
 						All selected work
 					</Link>
@@ -396,7 +396,7 @@ export default function ProjectDetailPage() {
 			<section className="project-detail__next project-detail__reveal">
 				<p>CASE FILE COMPLETE</p>
 				<h2>Want to see the rest of the board?</h2>
-				<Link to="/about">
+				<Link to="/work">
 					Explore selected work <ArrowIcon />
 				</Link>
 			</section>
