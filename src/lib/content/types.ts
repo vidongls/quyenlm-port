@@ -22,11 +22,14 @@ export type ProjectContent = {
 	title: string;
 };
 
-export type ProjectStatus = "archived" | "draft" | "published";
-
 export type AboutContent = {
 	bioOne: string;
 	bioTwo: string;
+	collaboration: {
+		body: string;
+		strengths: string[];
+		title: string;
+	};
 	credentials: Array<{ source: string; title: string }>;
 	dailyKit: string[];
 	impact: Array<{
@@ -43,6 +46,16 @@ export type AboutContent = {
 		role: string;
 	}>;
 	kicker: string;
+	leadership: Array<{
+		description: string;
+		label: string;
+		title: string;
+	}>;
+	operatingRhythm: Array<{
+		description: string;
+		step: string;
+		title: string;
+	}>;
 	philosophy: Array<{ description: string; icon: string; title: string }>;
 	photoAlt: string;
 	photoSubtitle: string;
@@ -79,82 +92,4 @@ export type ProjectDetailContent = {
 	researchTitle: string;
 	title: string;
 	titleAccent: string;
-};
-
-export type PageContentMap = {
-	about: AboutContent;
-	"fintech-detail": ProjectDetailContent;
-	"hanoi-transit-detail": ProjectDetailContent;
-	"medsync-detail": ProjectDetailContent;
-};
-
-export type PageKey = keyof PageContentMap;
-
-export type AdminPageDocument = {
-	[K in PageKey]: {
-		content: PageContentMap[K];
-		key: K;
-		publishedAt: string | null;
-		updatedAt: string;
-	};
-}[PageKey];
-
-export type AdminProject = {
-	content: ProjectContent;
-	detailContent: ProjectDetailContent;
-	featured: boolean;
-	id: string;
-	publishedAt: string | null;
-	slug: string;
-	sortOrder: number;
-	status: ProjectStatus;
-	updatedAt: string;
-};
-
-export type ContentRevision = {
-	action: "draft_saved" | "published" | "restored";
-	actorEmail: string;
-	contentJson: string;
-	createdAt: string;
-	entityId: string;
-	entityType: "project" | "site";
-	id: string;
-};
-
-export type MediaAsset = {
-	altText: string;
-	byteSize: number;
-	createdAt: string;
-	fileName: string;
-	id: string;
-	mimeType: string;
-	objectKey: string;
-	url: string;
-};
-
-export type AdminContent = {
-	identity: {
-		email: string;
-		mode: "cloudflare-access" | "local-development";
-	};
-	media: MediaAsset[];
-	pages: AdminPageDocument[];
-	projects: AdminProject[];
-	revisions: ContentRevision[];
-	settings: SiteSettings;
-};
-
-export type SaveProjectInput = {
-	content: ProjectContent;
-	detailContent: ProjectDetailContent;
-	featured: boolean;
-	id: string;
-	slug: string;
-	sortOrder: number;
-	status: ProjectStatus;
-};
-
-export type SavePageInput<K extends PageKey = PageKey> = {
-	content: PageContentMap[K];
-	key: K;
 };

@@ -11,12 +11,9 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WorkRouteImport } from './routes/work'
 import { Route as ContactRouteImport } from './routes/contact'
-import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProjectsSlugRouteImport } from './routes/projects.$slug'
-import { Route as ApiMediaRouteImport } from './routes/api.media'
-import { Route as ApiAdminMediaRouteImport } from './routes/api.admin.media'
 
 const WorkRoute = WorkRouteImport.update({
   id: '/work',
@@ -26,11 +23,6 @@ const WorkRoute = WorkRouteImport.update({
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AdminRoute = AdminRouteImport.update({
-  id: '/admin',
-  path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -48,90 +40,43 @@ const ProjectsSlugRoute = ProjectsSlugRouteImport.update({
   path: '/projects/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiMediaRoute = ApiMediaRouteImport.update({
-  id: '/api/media',
-  path: '/api/media',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiAdminMediaRoute = ApiAdminMediaRouteImport.update({
-  id: '/api/admin/media',
-  path: '/api/admin/media',
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/admin': typeof AdminRoute
   '/contact': typeof ContactRoute
   '/work': typeof WorkRoute
-  '/api/media': typeof ApiMediaRoute
   '/projects/$slug': typeof ProjectsSlugRoute
-  '/api/admin/media': typeof ApiAdminMediaRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/admin': typeof AdminRoute
   '/contact': typeof ContactRoute
   '/work': typeof WorkRoute
-  '/api/media': typeof ApiMediaRoute
   '/projects/$slug': typeof ProjectsSlugRoute
-  '/api/admin/media': typeof ApiAdminMediaRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/admin': typeof AdminRoute
   '/contact': typeof ContactRoute
   '/work': typeof WorkRoute
-  '/api/media': typeof ApiMediaRoute
   '/projects/$slug': typeof ProjectsSlugRoute
-  '/api/admin/media': typeof ApiAdminMediaRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | '/'
-    | '/about'
-    | '/admin'
-    | '/contact'
-    | '/work'
-    | '/api/media'
-    | '/projects/$slug'
-    | '/api/admin/media'
+  fullPaths: '/' | '/about' | '/contact' | '/work' | '/projects/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/'
-    | '/about'
-    | '/admin'
-    | '/contact'
-    | '/work'
-    | '/api/media'
-    | '/projects/$slug'
-    | '/api/admin/media'
-  id:
-    | '__root__'
-    | '/'
-    | '/about'
-    | '/admin'
-    | '/contact'
-    | '/work'
-    | '/api/media'
-    | '/projects/$slug'
-    | '/api/admin/media'
+  to: '/' | '/about' | '/contact' | '/work' | '/projects/$slug'
+  id: '__root__' | '/' | '/about' | '/contact' | '/work' | '/projects/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
-  AdminRoute: typeof AdminRoute
   ContactRoute: typeof ContactRoute
   WorkRoute: typeof WorkRoute
-  ApiMediaRoute: typeof ApiMediaRoute
   ProjectsSlugRoute: typeof ProjectsSlugRoute
-  ApiAdminMediaRoute: typeof ApiAdminMediaRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -148,13 +93,6 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/admin': {
-      id: '/admin'
-      path: '/admin'
-      fullPath: '/admin'
-      preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -178,32 +116,15 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProjectsSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/media': {
-      id: '/api/media'
-      path: '/api/media'
-      fullPath: '/api/media'
-      preLoaderRoute: typeof ApiMediaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/admin/media': {
-      id: '/api/admin/media'
-      path: '/api/admin/media'
-      fullPath: '/api/admin/media'
-      preLoaderRoute: typeof ApiAdminMediaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
-  AdminRoute: AdminRoute,
   ContactRoute: ContactRoute,
   WorkRoute: WorkRoute,
-  ApiMediaRoute: ApiMediaRoute,
   ProjectsSlugRoute: ProjectsSlugRoute,
-  ApiAdminMediaRoute: ApiAdminMediaRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

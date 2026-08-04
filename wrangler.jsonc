@@ -6,18 +6,5 @@
   "main": "@tanstack/react-start/server-entry",
   "observability": {
     "enabled": true
-  },
-  "d1_databases": [
-    {
-      "binding": "CONTENT_DB",
-      "database_name": "quyenlm-port-content",
-      "migrations_dir": "migrations"
-    }
-  ],
-  "r2_buckets": [
-    {
-      "binding": "MEDIA_BUCKET",
-      "bucket_name": "quyenlm-port-media"
-    }
-  ]
+  }
 }

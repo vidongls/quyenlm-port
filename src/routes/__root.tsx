@@ -1,10 +1,5 @@
 import { TanStackDevtools } from "@tanstack/react-devtools";
-import {
-	createRootRoute,
-	HeadContent,
-	Scripts,
-	useRouterState,
-} from "@tanstack/react-router";
+import { createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import {
 	CustomCursor,
@@ -12,12 +7,11 @@ import {
 	SiteHeader,
 	SitePreloader,
 } from "../components/ui";
-import { getPublishedSiteSettingsFn } from "../lib/content/functions";
+import { DEFAULT_SITE_SETTINGS } from "../lib/content/defaults";
 
 import appCss from "../styles.css?url";
 
 export const Route = createRootRoute({
-	loader: () => getPublishedSiteSettingsFn(),
 	head: () => ({
 		meta: [
 			{
@@ -42,10 +36,7 @@ export const Route = createRootRoute({
 });
 
 function RootDocument({ children }: { children: React.ReactNode }) {
-	const settings = Route.useLoaderData();
-	const isAdmin = useRouterState({
-		select: (state) => state.location.pathname.startsWith("/admin"),
-	});
+	const settings = DEFAULT_SITE_SETTINGS;
 
 	return (
 		<html lang="en">
@@ -55,16 +46,14 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 			<body className="bg-page text-ink font-sans antialiased [overflow-wrap:anywhere]">
 				<div className="site-shell">
 					{children}
-					{!isAdmin && <SiteHeader resumeHref={settings.resumeUrl} />}
-					{!isAdmin && (
-						<FloatingNav
-							emailHref={`mailto:${settings.email}`}
-							linkedinHref={settings.linkedinUrl}
-						/>
-					)}
+					<SiteHeader resumeHref={settings.resumeUrl} />
+					<FloatingNav
+						emailHref={`mailto:${settings.email}`}
+						linkedinHref={settings.linkedinUrl}
+					/>
 				</div>
-				{!isAdmin && <SitePreloader />}
-				{!isAdmin && <CustomCursor />}
+				<SitePreloader />
+				<CustomCursor />
 				<TanStackDevtools
 					config={{
 						position: "bottom-right",

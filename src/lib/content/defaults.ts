@@ -50,18 +50,81 @@ export const DEFAULT_PROJECTS: ProjectContent[] = [
 ];
 
 export const DEFAULT_ABOUT_CONTENT: AboutContent = {
-	kicker: "Xin Chào! I am Quyen",
-	title: "Get to know me",
+	kicker: "Senior Product Designer · Hanoi",
+	title: "Designing clarity in the messy middle.",
 	bioOne:
-		"I’m a product designer based in the heart of Hanoi, Vietnam. I specialize in deep user research and turning complex data flows into pixel-perfect interfaces that feel entirely natural to use.",
+		"I’m a senior product designer based in Hanoi, working across discovery, product strategy, interaction design and delivery. I turn ambiguous product questions and complex systems into clear decisions teams can confidently build.",
 	bioTwo:
-		'I believe in "invisible design" — where the user reaches their goal seamlessly without ever having to think about the interface itself. When I’m not interviewing users or pushing vectors in Figma, you’ll find me sketching at a local sidewalk coffee shop or collecting sticker packs.',
+		'My role is not to own every answer. It is to ask sharper questions, bring user evidence into the room, align product and engineering around the right trade-offs, and help the team ship an experience that feels "invisible" because it does its job exceptionally well.',
 	photoUrl: "/assets/work-photo-1.png",
 	photoAlt: "Quyen in a product design studio",
-	photoTitle: "Quyen in Ha Noi ☕️",
-	photoSubtitle: "Product Designer · Research & Interfaces",
+	photoTitle: "Quyen in Ha Noi",
+	photoSubtitle: "Senior Product Designer · Research & Systems",
 	yearsExperience: "5",
-	dailyKit: ["⚡ Figma", "✨ AI (Research)", "🎨 Miro / FigJam"],
+	dailyKit: ["Figma", "AI for synthesis", "Miro / FigJam"],
+	leadership: [
+		{
+			label: "01 / DIRECTION",
+			title: "Frame the right problem",
+			description:
+				"Turn broad business goals, user pain and technical constraints into a focused product question with clear success criteria.",
+		},
+		{
+			label: "02 / EVIDENCE",
+			title: "Make research actionable",
+			description:
+				"Choose the smallest useful study, synthesize patterns and connect evidence directly to product decisions—not a report that gathers dust.",
+		},
+		{
+			label: "03 / SYSTEMS",
+			title: "Design beyond one screen",
+			description:
+				"Model flows, states, edge cases and reusable patterns so the experience stays coherent as the product and team grow.",
+		},
+		{
+			label: "04 / LEVERAGE",
+			title: "Raise the team’s clarity",
+			description:
+				"Facilitate critique, document trade-offs, mentor through the work and create shared ownership with product and engineering.",
+		},
+	],
+	operatingRhythm: [
+		{
+			step: "01",
+			title: "Frame",
+			description: "Align on the decision, constraints and evidence we need.",
+		},
+		{
+			step: "02",
+			title: "Learn",
+			description: "Talk to users, inspect data and map the real workflow.",
+		},
+		{
+			step: "03",
+			title: "Align",
+			description: "Make trade-offs visible before investing in fidelity.",
+		},
+		{
+			step: "04",
+			title: "Make",
+			description: "Prototype the riskiest interaction and test it early.",
+		},
+		{
+			step: "05",
+			title: "Measure",
+			description: "Ship with a learning plan and improve from real behavior.",
+		},
+	],
+	collaboration: {
+		title: "The kind of room where I do my best work",
+		body: "A cross-functional team that shares context early, debates the problem honestly and treats design as a way to make better product decisions—not a service at the end of the process.",
+		strengths: [
+			"Early product shaping",
+			"Direct, kind critique",
+			"Shared ownership with engineering",
+			"Decision logs over design theatre",
+		],
+	},
 	credentials: [
 		{
 			title: "B.Sc. in Interaction Design",
@@ -73,15 +136,22 @@ export const DEFAULT_ABOUT_CONTENT: AboutContent = {
 		},
 	],
 	skills: [
-		"Figma",
+		"Product Strategy",
+		"Problem Framing",
+		"Research Planning",
 		"User Research",
+		"Research Synthesis",
+		"Interaction Design",
 		"Interactive Prototyping",
-		"Wireframing",
 		"Design Systems",
+		"Accessibility",
 		"Usability Testing",
-		"Design Thinking",
 		"Information Architecture",
+		"Workshop Facilitation",
 		"Stakeholder Management",
+		"Design Critique",
+		"Mentoring",
+		"Outcome Definition",
 	],
 	journey: [
 		{
@@ -135,26 +205,26 @@ export const DEFAULT_ABOUT_CONTENT: AboutContent = {
 	philosophy: [
 		{
 			icon: "/assets/work-icon-research.svg",
-			title: "Research First 🔍",
+			title: "Research before certainty",
 			description: "Every pixel is backed by real user insight.",
 		},
 		{
 			icon: "/assets/work-icon-sparkles.svg",
-			title: "Invisible UX ✨",
+			title: "Invisible by intention",
 			description: "The best interface is one you never notice.",
 		},
 		{
 			icon: "/assets/work-icon-rocket.svg",
-			title: "Ship & Iterate 🚀",
+			title: "Ship to keep learning",
 			description: "Perfect is the enemy of shipped — move fast, learn faster.",
 		},
 	],
 	interests: [
-		"Coffee Explorer ☕",
-		"Sticker Collector 🎨",
-		"Street Sketcher ✏️",
-		"Podcast Junkie 🎧",
-		"Cat Person 🐱",
+		"Coffee Explorer",
+		"Sticker Collector",
+		"Street Sketcher",
+		"Podcast Notes",
+		"Cat Person",
 	],
 };
 
