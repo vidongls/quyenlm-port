@@ -1,8 +1,9 @@
 import { type FormEvent, useState } from "react";
+import type { SiteSettings } from "../../lib/content/types";
 import DraggableSticker from "../home/DraggableSticker";
 import "./ContactPage.css";
 
-export default function ContactPage() {
+export default function ContactPage({ settings }: { settings: SiteSettings }) {
 	const [isPinned, setIsPinned] = useState(false);
 
 	function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -36,7 +37,7 @@ export default function ContactPage() {
 						</span>
 						<div>
 							<p>CURRENTLY BASED IN</p>
-							<strong>Ha Noi, Viet Nam</strong>
+							<strong>{settings.location}</strong>
 						</div>
 					</article>
 
@@ -54,12 +55,13 @@ export default function ContactPage() {
 						<p>{"// FIND ME AROUND THE WEB"}</p>
 						<div>
 							<a
-								href="https://www.linkedin.com"
+								href={settings.linkedinUrl}
 								target="_blank"
-								rel="noreferrer"
+								rel="noopener noreferrer"
 							>
 								LinkedIn
 							</a>
+							<a href={`mailto:${settings.email}`}>Email</a>
 							<a
 								href="https://www.behance.net"
 								target="_blank"

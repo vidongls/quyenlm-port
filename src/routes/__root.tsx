@@ -56,7 +56,12 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 				<div className="site-shell">
 					{children}
 					{!isAdmin && <SiteHeader resumeHref={settings.resumeUrl} />}
-					{!isAdmin && <FloatingNav />}
+					{!isAdmin && (
+						<FloatingNav
+							emailHref={`mailto:${settings.email}`}
+							linkedinHref={settings.linkedinUrl}
+						/>
+					)}
 				</div>
 				{!isAdmin && <SitePreloader />}
 				{!isAdmin && <CustomCursor />}
