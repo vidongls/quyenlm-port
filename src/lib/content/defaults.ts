@@ -1,0 +1,414 @@
+import type {
+	AboutContent,
+	ProjectContent,
+	ProjectDetailContent,
+	SiteSettings,
+} from "./types";
+
+export const DEFAULT_SITE_SETTINGS: SiteSettings = {
+	name: "Quyen Le Minh",
+	role: "Product Designer · Research & Interfaces",
+	headline: "Good Design's",
+	highlight: "Invisible",
+	location: "Ha Noi, Viet Nam",
+	email: "hello@quyenlee.design",
+	linkedinUrl: "https://www.linkedin.com",
+	resumeUrl: "/resume.pdf",
+	seoTitle: "Quyen Le Minh — Product Designer",
+	seoDescription:
+		"Product designer focused on research, interfaces and invisible design.",
+};
+
+export const DEFAULT_PROJECTS: ProjectContent[] = [
+	{
+		title: "FinTech Hub: Smart Savings",
+		category: "Product Design",
+		summary:
+			"An AI-powered micro-investment platform built specifically for the Gen-Z market in Southeast Asia, simplifying automated savings.",
+		coverUrl: "/assets/home-project.png",
+		detailPath: "/projects/fintech-hub",
+		caseStudyLabel: "CASE STUDY",
+	},
+	{
+		title: "Hanoi Transit: Route Planner",
+		category: "UX Research & UI",
+		summary:
+			"Restructuring the local city bus routing experience through rigorous field research and a contextual offline-first map interface.",
+		coverUrl: "/assets/about-project.png",
+		detailPath: "/projects/hanoi-transit",
+		caseStudyLabel: "CASE STUDY",
+	},
+	{
+		title: "MedSync: Clinic Management",
+		category: "Interface Design",
+		summary:
+			"Designing an invisible, lightweight tablet dashboard for local clinics to schedule and diagnose without screen friction.",
+		coverUrl: "/assets/about-project.png",
+		detailPath: "/projects/medsync",
+		caseStudyLabel: "CASE STUDY",
+	},
+];
+
+export const DEFAULT_ABOUT_CONTENT: AboutContent = {
+	kicker: "Xin Chào! I am Quyen",
+	title: "Get to know me",
+	bioOne:
+		"I’m a product designer based in the heart of Hanoi, Vietnam. I specialize in deep user research and turning complex data flows into pixel-perfect interfaces that feel entirely natural to use.",
+	bioTwo:
+		'I believe in "invisible design" — where the user reaches their goal seamlessly without ever having to think about the interface itself. When I’m not interviewing users or pushing vectors in Figma, you’ll find me sketching at a local sidewalk coffee shop or collecting sticker packs.',
+	photoUrl: "/assets/work-photo-1.png",
+	photoAlt: "Quyen in a product design studio",
+	photoTitle: "Quyen in Ha Noi ☕️",
+	photoSubtitle: "Product Designer · Research & Interfaces",
+	yearsExperience: "5",
+	dailyKit: ["⚡ Figma", "✨ AI (Research)", "🎨 Miro / FigJam"],
+	credentials: [
+		{
+			title: "B.Sc. in Interaction Design",
+			source: "Ha Noi University of Science & Technology",
+		},
+		{
+			title: "UX Research Certified",
+			source: "Maze Academy & NN/g Courses",
+		},
+	],
+	skills: [
+		"Figma",
+		"User Research",
+		"Interactive Prototyping",
+		"Wireframing",
+		"Design Systems",
+		"Usability Testing",
+		"Design Thinking",
+		"Information Architecture",
+		"Stakeholder Management",
+	],
+	journey: [
+		{
+			period: "2024 - Present",
+			role: "Senior Product Designer",
+			company: "Levelset Studio",
+			description:
+				"Leading visual & UX architecture for big-data pipelines, complex dashboards, and next-gen collaborative tools.",
+		},
+		{
+			period: "2022 - 2024",
+			role: "UX / UI Designer",
+			company: "Aura Digital",
+			description:
+				"Designed mobile-first consumer applications and transactional flows with a major focus on interaction fidelity.",
+		},
+		{
+			period: "2020 - 2022",
+			role: "Junior Visual Designer",
+			company: "Meridian Group",
+			description:
+				"Established typography systems, marketing collateral, and foundational brand guidelines.",
+		},
+	],
+	impact: [
+		{
+			icon: "/assets/work-icon-package.svg",
+			tag: "Shipped",
+			value: "12+",
+			description: "Products shipped across web and mobile",
+		},
+		{
+			icon: "/assets/work-icon-users.svg",
+			tag: "Users",
+			value: "50K+",
+			description: "Users impacted by improved experiences",
+		},
+		{
+			icon: "/assets/work-icon-zap.svg",
+			tag: "Speed",
+			value: "3x",
+			description: "Faster onboarding for new users",
+		},
+		{
+			icon: "/assets/work-icon-award.svg",
+			tag: "Quality",
+			value: "98%",
+			description: "Usability score across recent launches",
+		},
+	],
+	philosophy: [
+		{
+			icon: "/assets/work-icon-research.svg",
+			title: "Research First 🔍",
+			description: "Every pixel is backed by real user insight.",
+		},
+		{
+			icon: "/assets/work-icon-sparkles.svg",
+			title: "Invisible UX ✨",
+			description: "The best interface is one you never notice.",
+		},
+		{
+			icon: "/assets/work-icon-rocket.svg",
+			title: "Ship & Iterate 🚀",
+			description: "Perfect is the enemy of shipped — move fast, learn faster.",
+		},
+	],
+	interests: [
+		"Coffee Explorer ☕",
+		"Sticker Collector 🎨",
+		"Street Sketcher ✏️",
+		"Podcast Junkie 🎧",
+		"Cat Person 🐱",
+	],
+};
+
+export const DEFAULT_PROJECT_DETAIL_CONTENT: ProjectDetailContent = {
+	eyebrow: "CASE FILE 01 / FINTECH",
+	title: "Smart savings,",
+	titleAccent: "without the mental overhead.",
+	lead: "A concept for turning spare change into visible momentum—designed for Gen-Z users who want to save, but do not want another finance chore.",
+	coverUrl: "/assets/home-project.png",
+	coverAlt:
+		"FinTech Flow mobile dashboard showing balance and investment portfolio",
+	coverTopNote: "ONE SMALL ACTION",
+	coverBottomNote: "VISIBLE PROGRESS",
+	meta: [
+		{ label: "Role", value: "Product Designer" },
+		{ label: "Scope", value: "Research → Prototype" },
+		{ label: "Timeline", value: "8 weeks" },
+		{ label: "Status", value: "Concept case study" },
+	],
+	briefTitle: "Saving was not the real problem. Feeling progress was.",
+	briefBody:
+		"Young earners already knew they should save. What stopped them was a loop of delayed rewards, intimidating language, and tools that demanded too much attention.",
+	howMightWe:
+		"Make saving feel rewarding now, while keeping automation calm, transparent and reversible?",
+	researchTitle: "Three frictions kept showing up.",
+	researchTag: "12 interviews / concept exercise",
+	researchSignals: [
+		{
+			number: "01",
+			title: "Saving feels too abstract",
+			body: "Long-term goals lose against the small, visible rewards users can get today.",
+		},
+		{
+			number: "02",
+			title: "Automation needs a brake",
+			body: "People want the system to help, but still need a clear sense of control.",
+		},
+		{
+			number: "03",
+			title: "Finance language creates distance",
+			body: "Investment terminology makes the first action feel riskier than it is.",
+		},
+	],
+	quote:
+		"I do not want to become an investor. I just want future me to have options.",
+	quoteCite: "— Synthesized research insight",
+	decisionsTitle: "Reduce the decisions before reducing the taps.",
+	flowSteps: [
+		{
+			step: "01",
+			title: "Name the win",
+			body: "Start with a real-life goal, not a financial product.",
+		},
+		{
+			step: "02",
+			title: "Set the comfort zone",
+			body: "Choose a flexible spare-change rule and a safety limit.",
+		},
+		{
+			step: "03",
+			title: "Watch it happen",
+			body: "See every contribution and pause it at any moment.",
+		},
+	],
+	decisionCards: [
+		{
+			label: "DECISION A",
+			title: "Goals before portfolios",
+			body: "The product speaks in outcomes—laptop, trip, emergency buffer—before introducing investment mechanics.",
+		},
+		{
+			label: "DECISION B",
+			title: "Automation with an escape hatch",
+			body: "Every rule exposes its limit, next action and pause control—building trust through reversibility.",
+		},
+	],
+	outcomesTitle: "The concept became easier to explain—and easier to trust.",
+	outcomesTag: "Prototype validation / directional",
+	outcomes: [
+		{ value: "42%", label: "faster goal setup" },
+		{ value: "8/10", label: "understood the saving rule" },
+		{ value: "3", label: "usability iterations" },
+	],
+	reflection:
+		"Move beyond comprehension into behavior: measure whether transparent automation improves 30-day retention without increasing financial anxiety.",
+	nextTitle: "Want to see the rest of the board?",
+};
+
+export const DEFAULT_HANOI_TRANSIT_DETAIL_CONTENT: ProjectDetailContent = {
+	...DEFAULT_PROJECT_DETAIL_CONTENT,
+	coverUrl: "/assets/about-project.png",
+	eyebrow: "CASE FILE 02 / URBAN MOBILITY",
+	title: "Finding the next bus,",
+	titleAccent: "without second-guessing the route.",
+	lead: "A route-planning experience built from field research with Hanoi commuters—designed to stay useful when connectivity and confidence both run low.",
+	coverAlt: "Hanoi Transit route-planning interface",
+	coverTopNote: "ONE CLEAR ROUTE",
+	coverBottomNote: "LESS TRAVEL ANXIETY",
+	meta: [
+		{ label: "Role", value: "UX Research & UI" },
+		{ label: "Scope", value: "Field study → Prototype" },
+		{ label: "Timeline", value: "6 weeks" },
+		{ label: "Status", value: "Mobility case study" },
+	],
+	briefTitle: "The route existed. Confidence in it did not.",
+	briefBody:
+		"Commuters could find a bus number, but fragmented stop information, unstable connectivity and unfamiliar transfer points made every journey feel uncertain.",
+	howMightWe:
+		"Help riders understand the next useful action even when the network, signage or connection is unreliable?",
+	researchTitle: "Three moments created most of the anxiety.",
+	researchTag: "18 intercept interviews / route shadowing",
+	researchSignals: [
+		{
+			number: "01",
+			title: "Stops lack a shared language",
+			body: "Names in apps, signs and everyday speech often describe the same place differently.",
+		},
+		{
+			number: "02",
+			title: "Transfers feel irreversible",
+			body: "Riders hesitate when they cannot see what happens immediately after leaving a bus.",
+		},
+		{
+			number: "03",
+			title: "Offline is the real commute",
+			body: "The most important instruction must survive tunnels, weak data and a locked screen.",
+		},
+	],
+	quote:
+		"I know the bus number. I just do not know if this is the right side of the road.",
+	quoteCite: "— Commuter interview, Hanoi",
+	decisionsTitle: "Design the journey around certainty, not map complexity.",
+	flowSteps: [
+		{
+			step: "01",
+			title: "Choose the intent",
+			body: "Start with destination and arrival need instead of transport terminology.",
+		},
+		{
+			step: "02",
+			title: "Confirm the stop",
+			body: "Pair landmark, walking direction and side-of-road context.",
+		},
+		{
+			step: "03",
+			title: "Carry the route offline",
+			body: "Keep the next action visible without requiring a network refresh.",
+		},
+	],
+	decisionCards: [
+		{
+			label: "DECISION A",
+			title: "Landmarks before coordinates",
+			body: "Instructions use recognizable street context before exposing geographic precision.",
+		},
+		{
+			label: "DECISION B",
+			title: "One next action",
+			body: "The active journey emphasizes only the instruction the rider can act on now.",
+		},
+	],
+	outcomesTitle: "Riders understood the route with less map checking.",
+	outcomesTag: "Moderated route simulation",
+	outcomes: [
+		{ value: "35%", label: "faster stop confirmation" },
+		{ value: "9/10", label: "understood the next action" },
+		{ value: "4", label: "field iterations" },
+	],
+	reflection:
+		"Test the offline route card during real service disruptions and validate language with riders outside the central districts.",
+	nextTitle: "Explore another case file?",
+};
+
+export const DEFAULT_MEDSYNC_DETAIL_CONTENT: ProjectDetailContent = {
+	...DEFAULT_PROJECT_DETAIL_CONTENT,
+	coverUrl: "/assets/about-project.png",
+	eyebrow: "CASE FILE 03 / HEALTHCARE",
+	title: "A calmer clinic day,",
+	titleAccent: "without another heavy dashboard.",
+	lead: "A lightweight tablet workspace for local clinics—designed to coordinate appointments, patient context and follow-ups without pulling attention away from care.",
+	coverAlt: "MedSync clinic-management tablet dashboard",
+	coverTopNote: "PATIENT CONTEXT",
+	coverBottomNote: "CALMER HANDOFFS",
+	meta: [
+		{ label: "Role", value: "Interface Designer" },
+		{ label: "Scope", value: "Workflow mapping → UI" },
+		{ label: "Timeline", value: "7 weeks" },
+		{ label: "Status", value: "Healthcare concept" },
+	],
+	briefTitle: "The clinic did not need more data. It needed a clearer handoff.",
+	briefBody:
+		"Staff moved between paper notes, chat messages and scheduling tools. The fragmentation created repeated questions and made small changes harder to see.",
+	howMightWe:
+		"Keep the whole care team aligned while preserving a calm, patient-first consultation experience?",
+	researchTitle: "Three workflow breaks repeated across the day.",
+	researchTag: "9 staff interviews / service blueprint",
+	researchSignals: [
+		{
+			number: "01",
+			title: "Context arrives too late",
+			body: "Important notes are often discovered only after the patient enters the room.",
+		},
+		{
+			number: "02",
+			title: "Small delays cascade",
+			body: "A single schedule change creates repeated manual updates across the team.",
+		},
+		{
+			number: "03",
+			title: "Alerts compete with care",
+			body: "Urgency loses meaning when every update demands the same visual attention.",
+		},
+	],
+	quote: "I want to know what changed, not reread the whole patient record.",
+	quoteCite: "— Clinic coordinator interview",
+	decisionsTitle:
+		"Make changed context visible while keeping the interface quiet.",
+	flowSteps: [
+		{
+			step: "01",
+			title: "Scan the day",
+			body: "See schedule health, delays and preparation needs in one pass.",
+		},
+		{
+			step: "02",
+			title: "Open patient context",
+			body: "Surface only information relevant to the current visit.",
+		},
+		{
+			step: "03",
+			title: "Close the handoff",
+			body: "Assign the follow-up and confirm ownership before moving on.",
+		},
+	],
+	decisionCards: [
+		{
+			label: "DECISION A",
+			title: "Changes before completeness",
+			body: "The workspace highlights what is new before exposing the full patient history.",
+		},
+		{
+			label: "DECISION B",
+			title: "Quiet by default",
+			body: "Visual priority is reserved for issues that require action during the current shift.",
+		},
+	],
+	outcomesTitle: "The daily schedule became easier to scan and hand off.",
+	outcomesTag: "Workflow prototype / directional",
+	outcomes: [
+		{ value: "31%", label: "faster schedule scan" },
+		{ value: "8/9", label: "found changed context" },
+		{ value: "3", label: "workflow iterations" },
+	],
+	reflection:
+		"Validate permission boundaries and notification priority with a broader mix of clinical roles before testing in a live shift.",
+	nextTitle: "See the rest of the selected work?",
+};

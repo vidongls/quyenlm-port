@@ -1,30 +1,12 @@
 import AboutProjectCard from "../about/AboutProjectCard";
 import "../about/AboutPage.css";
+import type { ProjectContent } from "../../lib/content/types";
 
-const PROJECTS = [
-	{
-		title: "FinTech Hub: Smart Savings",
-		tag: "Product Design",
-		description:
-			"An AI-powered micro-investment platform built specifically for the Gen-Z market in Southeast Asia, simplifying automated savings.",
-		featured: true,
-		href: "/projects/fintech-hub",
-	},
-	{
-		title: "Hanoi Transit: Route Planner",
-		tag: "UX Research & UI",
-		description:
-			"Restructuring the local city bus routing experience through rigorous field research and a contextual offline-first map interface.",
-	},
-	{
-		title: "MedSync: Clinic Management",
-		tag: "Interface Design",
-		description:
-			"Designing an invisible, lightweight tablet dashboard for local clinics to schedule and diagnose without screen friction.",
-	},
-] as const;
-
-export default function SelectedWorkPage() {
+export default function SelectedWorkPage({
+	projects,
+}: {
+	projects: ProjectContent[];
+}) {
 	return (
 		<main
 			id="work"
@@ -48,9 +30,16 @@ export default function SelectedWorkPage() {
 					className="mt-12 grid grid-cols-1 items-stretch gap-6 md:grid-cols-2 lg:grid-cols-3"
 					aria-label="Selected case studies"
 				>
-					{PROJECTS.map((project) => (
+					{projects.map((project, index) => (
 						<div key={project.title} className="about-page__card">
-							<AboutProjectCard {...project} />
+							<AboutProjectCard
+								title={project.title}
+								tag={project.category}
+								description={project.summary}
+								imageUrl={project.coverUrl}
+								href={project.detailPath}
+								featured={index === 0}
+							/>
 						</div>
 					))}
 				</section>

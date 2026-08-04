@@ -4,17 +4,16 @@ import HoverLottieSticker from "./HoverLottieSticker";
 import InvisibleDesignEffect from "./InvisibleDesignEffect";
 import RotatingTypewriter from "./RotatingTypewriter";
 import "./HomeResponsive.css";
+import type { SiteSettings } from "../../lib/content/types";
 
-export default function HomeMobile() {
+export default function HomeMobile({ settings }: { settings: SiteSettings }) {
 	return (
 		<div className="home-mobile">
 			<section
 				className="home-mobile__hero"
 				aria-labelledby="home-mobile-title"
 			>
-				<p className="home-mobile__tag">
-					Product Designer · Research &amp; Interfaces
-				</p>
+				<p className="home-mobile__tag">{settings.role}</p>
 
 				<div className="home-mobile__avatar">
 					<HoverLottieSticker
@@ -24,7 +23,8 @@ export default function HomeMobile() {
 				</div>
 
 				<h1 id="home-mobile-title">
-					Good Design&apos;s <InvisibleDesignEffect />
+					{settings.headline}{" "}
+					<InvisibleDesignEffect word={settings.highlight} />
 				</h1>
 
 				<p className="home-mobile__subtitle">
@@ -80,8 +80,8 @@ export default function HomeMobile() {
 					alt="Portrait of Quyen in Ha Noi"
 				/>
 				<div>
-					<p>📍 Ha Noi, Viet Nam</p>
-					<h2 id="mobile-about">Hi, I&apos;m Quyen</h2>
+					<p>📍 {settings.location}</p>
+					<h2 id="mobile-about">Hi, I&apos;m {settings.name.split(" ")[0]}</h2>
 					<Link to="/about">Get to know me →</Link>
 				</div>
 			</section>

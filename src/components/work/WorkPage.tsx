@@ -1,96 +1,8 @@
 import "./WorkPage.css";
+import type { AboutContent } from "../../lib/content/types";
 import DraggableSticker from "../home/DraggableSticker";
 
-const SKILLS = [
-	"Figma",
-	"User Research",
-	"Interactive Prototyping",
-	"Wireframing",
-	"Design Systems",
-	"Usability Testing",
-	"Design Thinking",
-	"Information Architecture",
-	"Stakeholder Management",
-] as const;
-
-const JOURNEY = [
-	{
-		period: "2024 - Present",
-		role: "Senior Product Designer",
-		company: "Levelset Studio",
-		description:
-			"Leading visual & UX architecture for big-data pipelines, complex dashboards, and next-gen collaborative tools.",
-	},
-	{
-		period: "2022 - 2024",
-		role: "UX / UI Designer",
-		company: "Aura Digital",
-		description:
-			"Designed mobile-first consumer applications and transactional flows with a major focus on interaction fidelity.",
-	},
-	{
-		period: "2020 - 2022",
-		role: "Junior Visual Designer",
-		company: "Meridian Group",
-		description:
-			"Established typography systems, marketing collateral, and foundational brand guidelines.",
-	},
-] as const;
-
-const IMPACT = [
-	{
-		icon: "/assets/work-icon-package.svg",
-		tag: "Shipped",
-		value: "12+",
-		description: "Products shipped across web and mobile",
-	},
-	{
-		icon: "/assets/work-icon-users.svg",
-		tag: "Users",
-		value: "50K+",
-		description: "Users impacted by improved experiences",
-	},
-	{
-		icon: "/assets/work-icon-zap.svg",
-		tag: "Speed",
-		value: "3x",
-		description: "Faster onboarding for new users",
-	},
-	{
-		icon: "/assets/work-icon-award.svg",
-		tag: "Quality",
-		value: "98%",
-		description: "Usability score across recent launches",
-	},
-] as const;
-
-const PHILOSOPHY = [
-	{
-		icon: "/assets/work-icon-research.svg",
-		title: "Research First 🔍",
-		description: "Every pixel is backed by real user insight.",
-	},
-	{
-		icon: "/assets/work-icon-sparkles.svg",
-		title: "Invisible UX ✨",
-		description: "The best interface is one you never notice.",
-	},
-	{
-		icon: "/assets/work-icon-rocket.svg",
-		title: "Ship & Iterate 🚀",
-		description: "Perfect is the enemy of shipped — move fast, learn faster.",
-	},
-] as const;
-
-const INTERESTS = [
-	"Coffee Explorer ☕",
-	"Sticker Collector 🎨",
-	"Street Sketcher ✏️",
-	"Podcast Junkie 🎧",
-	"Cat Person 🐱",
-] as const;
-
-function ProfileBoard() {
+function ProfileBoard({ content }: { content: AboutContent }) {
 	return (
 		<div className="work-profile">
 			<DraggableSticker
@@ -102,13 +14,10 @@ function ProfileBoard() {
 
 			<article className="work-polaroid">
 				<div className="work-polaroid__photo">
-					<img
-						src="/assets/work-photo-1.png"
-						alt="Quyen in a product design studio"
-					/>
+					<img src={content.photoUrl} alt={content.photoAlt} />
 				</div>
-				<h2>Quyen in Ha Noi ☕️</h2>
-				<p>Product Designer · Research &amp; Interfaces</p>
+				<h2>{content.photoTitle}</h2>
+				<p>{content.photoSubtitle}</p>
 			</article>
 
 			<DraggableSticker
@@ -116,7 +25,7 @@ function ProfileBoard() {
 				className="work-sticker-drag work-sticker-drag--experience"
 			>
 				<aside className="work-sticker work-sticker--experience">
-					<strong>5</strong>
+					<strong>{content.yearsExperience}</strong>
 					<span>Years Exp</span>
 				</aside>
 			</DraggableSticker>
@@ -127,64 +36,48 @@ function ProfileBoard() {
 			>
 				<aside className="work-sticker work-sticker--tools">
 					<strong>My Daily Kit:</strong>
-					<span>⚡ Figma</span>
-					<span>✨ AI (Research)</span>
-					<span>🎨 Miro / FigJam</span>
+					{content.dailyKit.map((tool) => (
+						<span key={tool}>{tool}</span>
+					))}
 				</aside>
 			</DraggableSticker>
 		</div>
 	);
 }
 
-function Intro() {
+function Intro({ content }: { content: AboutContent }) {
 	return (
 		<section className="work-intro" aria-labelledby="work-title">
-			<ProfileBoard />
+			<ProfileBoard content={content} />
 
 			<div className="work-intro__copy">
-				<p className="work-kicker">Xin Chào! I am Quyen</p>
-				<h1 id="work-title">Get to know me</h1>
+				<p className="work-kicker">{content.kicker}</p>
+				<h1 id="work-title">{content.title}</h1>
 				<div className="work-intro__bio">
-					<p>
-						I&apos;m a product designer based in the heart of Hanoi, Vietnam. I
-						specialize in{" "}
-						<strong className="work-blue">deep user research</strong> and
-						turning complex data flows into{" "}
-						<strong className="work-coral">pixel-perfect interfaces</strong>{" "}
-						that feel entirely natural to use.
-					</p>
-					<p>
-						I believe in &quot;invisible design&quot; — where the user reaches
-						their goal seamlessly without ever having to think about the
-						interface itself. When I&apos;m not interviewing users or pushing
-						vectors in Figma, you&apos;ll find me sketching at a local sidewalk
-						coffee shop or collecting sticker packs.
-					</p>
+					<p>{content.bioOne}</p>
+					<p>{content.bioTwo}</p>
 				</div>
 
 				<article className="work-credentials">
 					<h2>🎓 Credentials &amp; Roots</h2>
-					<p>
-						<strong>B.Sc. in Interaction Design</strong> - Ha Noi University of
-						Science &amp; Technology
-					</p>
-					<p>
-						<strong>UX Research Certified</strong> - Maze Academy &amp; NN/g
-						Courses
-					</p>
+					{content.credentials.map((credential) => (
+						<p key={credential.title}>
+							<strong>{credential.title}</strong> - {credential.source}
+						</p>
+					))}
 				</article>
 			</div>
 		</section>
 	);
 }
 
-function Journey() {
+function Journey({ content }: { content: AboutContent }) {
 	return (
 		<section className="work-journey">
 			<div>
 				<h2 className="work-section-title">Skills &amp; Toolkit</h2>
 				<div className="work-badges">
-					{SKILLS.map((skill, index) => (
+					{content.skills.map((skill, index) => (
 						<span
 							key={skill}
 							className="work-badge"
@@ -201,7 +94,7 @@ function Journey() {
 					My Journey
 				</h2>
 				<div className="work-timeline">
-					{JOURNEY.map((item, index) => (
+					{content.journey.map((item, index) => (
 						<article
 							key={item.period}
 							className="work-timeline__item"
@@ -221,7 +114,7 @@ function Journey() {
 	);
 }
 
-function Impact() {
+function Impact({ content }: { content: AboutContent }) {
 	return (
 		<section aria-labelledby="impact-title">
 			<h2
@@ -231,7 +124,7 @@ function Impact() {
 				Impact by Numbers
 			</h2>
 			<div className="work-impact-grid">
-				{IMPACT.map((item, index) => (
+				{content.impact.map((item, index) => (
 					<article
 						key={item.tag}
 						className="work-impact-card"
@@ -252,7 +145,7 @@ function Impact() {
 	);
 }
 
-function Philosophy() {
+function Philosophy({ content }: { content: AboutContent }) {
 	return (
 		<section className="work-philosophy" aria-labelledby="philosophy-title">
 			<h2
@@ -262,7 +155,7 @@ function Philosophy() {
 				Design Philosophy
 			</h2>
 			<div className="work-philosophy__grid">
-				{PHILOSOPHY.map((item) => (
+				{content.philosophy.map((item) => (
 					<article key={item.title} className="work-philosophy-card">
 						<span className="work-icon">
 							<img src={item.icon} alt="" />
@@ -276,7 +169,7 @@ function Philosophy() {
 	);
 }
 
-export default function WorkPage() {
+export default function WorkPage({ content }: { content: AboutContent }) {
 	return (
 		<main
 			id="about"
@@ -285,11 +178,11 @@ export default function WorkPage() {
 			data-node-id="309:6600"
 		>
 			<div className="work-page__inner">
-				<Intro />
-				<Journey />
+				<Intro content={content} />
+				<Journey content={content} />
 				<div className="work-recruiter">
-					<Impact />
-					<Philosophy />
+					<Impact content={content} />
+					<Philosophy content={content} />
 					<section aria-labelledby="interests-title">
 						<h2
 							id="interests-title"
@@ -298,7 +191,7 @@ export default function WorkPage() {
 							Beyond the Screen
 						</h2>
 						<div className="work-badges">
-							{INTERESTS.map((interest, index) => (
+							{content.interests.map((interest, index) => (
 								<span
 									key={interest}
 									className="work-badge"

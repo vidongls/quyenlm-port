@@ -1,49 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
+import type { ProjectDetailContent } from "../../lib/content/types";
 import "./ProjectDetailPage.css";
-
-const PROJECT_META = [
-	["Role", "Product Designer"],
-	["Scope", "Research → Prototype"],
-	["Timeline", "8 weeks"],
-	["Status", "Concept case study"],
-] as const;
-
-const RESEARCH_SIGNALS = [
-	{
-		number: "01",
-		title: "Saving feels too abstract",
-		body: "Long-term goals lose against the small, visible rewards users can get today.",
-	},
-	{
-		number: "02",
-		title: "Automation needs a brake",
-		body: "People want the system to help, but still need a clear sense of control.",
-	},
-	{
-		number: "03",
-		title: "Finance language creates distance",
-		body: "Investment terminology makes the first action feel riskier than it is.",
-	},
-] as const;
-
-const FLOW_STEPS = [
-	{
-		step: "01",
-		title: "Name the win",
-		body: "Start with a real-life goal, not a financial product.",
-	},
-	{
-		step: "02",
-		title: "Set the comfort zone",
-		body: "Choose a flexible spare-change rule and a safety limit.",
-	},
-	{
-		step: "03",
-		title: "Watch it happen",
-		body: "See every contribution and pause it at any moment.",
-	},
-] as const;
 
 function ArrowIcon() {
 	return (
@@ -53,24 +11,62 @@ function ArrowIcon() {
 	);
 }
 
-function SavingsSimulator() {
+type PrototypeKind = "clinic" | "savings" | "transit";
+
+function SavingsSimulator({ kind }: { kind: PrototypeKind }) {
 	const [dailyAmount, setDailyAmount] = useState(4);
-	const yearlyAmount = dailyAmount * 365;
-	const progress = Math.min(100, Math.round((yearlyAmount / 1800) * 100));
+	const configurations = {
+		savings: {
+			heading: "Make the invisible saving habit visible.",
+			description:
+				"Adjust an amount that feels unnoticeable today. The interface turns it into a concrete future reward.",
+			control: "Automatic daily saving",
+			value: `$${dailyAmount}`,
+			goal: "NEW LAPTOP",
+			result: `$${(dailyAmount * 365).toLocaleString("en-US")}`,
+			resultLabel: "saved in one year",
+			message: "Your daily choice can cover this much of the goal.",
+			progress: Math.min(100, Math.round(((dailyAmount * 365) / 1800) * 100)),
+		},
+		transit: {
+			heading: "Make the next transit action unmistakable.",
+			description:
+				"Increase the amount of landmark and offline context shown with each route instruction.",
+			control: "Route context level",
+			value: `${dailyAmount}/10`,
+			goal: "ROUTE CONFIDENCE",
+			result: `${dailyAmount * 10}%`,
+			resultLabel: "next-action clarity",
+			message: "Clear stop context reduces repeated map checking.",
+			progress: dailyAmount * 10,
+		},
+		clinic: {
+			heading: "Make changed patient context easier to spot.",
+			description:
+				"Adjust how strongly the workspace prioritizes updates from the current clinic shift.",
+			control: "Change visibility",
+			value: `${dailyAmount}/10`,
+			goal: "SHIFT READINESS",
+			result: `${dailyAmount * 10}%`,
+			resultLabel: "handoff clarity",
+			message:
+				"Focused changes help the team prepare without rereading everything.",
+			progress: dailyAmount * 10,
+		},
+	} as const;
+	const prototype = configurations[kind];
+	const progress = prototype.progress;
 
 	return (
 		<div className="project-simulator">
 			<div className="project-simulator__control">
 				<p className="project-detail__mono-label">LIVE PROTOTYPE / TRY IT</p>
-				<h3>Make the invisible saving habit visible.</h3>
-				<p>
-					Adjust an amount that feels unnoticeable today. The interface turns it
-					into a concrete future reward.
-				</p>
+				<h3>{prototype.heading}</h3>
+				<p>{prototype.description}</p>
 
 				<label htmlFor="daily-saving">
-					<span>Automatic daily saving</span>
-					<strong>${dailyAmount}</strong>
+					<span>{prototype.control}</span>
+					<strong>{prototype.value}</strong>
 				</label>
 				<input
 					id="daily-saving"
@@ -97,9 +93,11 @@ function SavingsSimulator() {
 					<span>{progress}%</span>
 				</div>
 				<div className="project-simulator__goal">
-					<span className="project-simulator__goal-label">NEW LAPTOP</span>
-					<strong>${yearlyAmount.toLocaleString("en-US")}</strong>
-					<p>saved in one year</p>
+					<span className="project-simulator__goal-label">
+						{prototype.goal}
+					</span>
+					<strong>{prototype.result}</strong>
+					<p>{prototype.resultLabel}</p>
 					<div className="project-simulator__progress" aria-hidden="true">
 						<span
 							className="project-simulator__progress-fill"
@@ -112,8 +110,7 @@ function SavingsSimulator() {
 						↗
 					</span>
 					<p>
-						Your daily choice can cover{" "}
-						<strong>{progress}% of this goal</strong>.
+						{prototype.message} <strong>{progress}%</strong>.
 					</p>
 				</div>
 			</div>
@@ -121,7 +118,13 @@ function SavingsSimulator() {
 	);
 }
 
-export default function ProjectDetailPage() {
+export default function ProjectDetailPage({
+	content,
+	prototypeKind = "savings",
+}: {
+	content: ProjectDetailContent;
+	prototypeKind?: PrototypeKind;
+}) {
 	const pageRef = useRef<HTMLElement>(null);
 
 	useEffect(() => {
@@ -168,23 +171,19 @@ export default function ProjectDetailPage() {
 						<ArrowIcon />
 						All selected work
 					</Link>
-					<p className="project-detail__eyebrow">CASE FILE 01 / FINTECH</p>
+					<p className="project-detail__eyebrow">{content.eyebrow}</p>
 					<h1 id="project-title">
-						Smart savings,
+						{content.title}
 						<span className="project-detail__title-accent">
-							without the mental overhead.
+							{content.titleAccent}
 						</span>
 					</h1>
-					<p className="project-detail__lead">
-						A concept for turning spare change into visible momentum—designed
-						for Gen-Z users who want to save, but do not want another finance
-						chore.
-					</p>
+					<p className="project-detail__lead">{content.lead}</p>
 				</div>
 
 				<div className="project-detail__cover">
 					<span className="project-detail__cover-note project-detail__cover-note--top">
-						ONE SMALL ACTION
+						{content.coverTopNote}
 					</span>
 					<div className="project-detail__cover-window">
 						<div className="project-detail__cover-toolbar">
@@ -193,21 +192,18 @@ export default function ProjectDetailPage() {
 							<i />
 							<strong>final-prototype.fig</strong>
 						</div>
-						<img
-							src="/assets/home-project.png"
-							alt="FinTech Flow mobile dashboard showing balance and investment portfolio"
-						/>
+						<img src={content.coverUrl} alt={content.coverAlt} />
 					</div>
 					<span className="project-detail__cover-note project-detail__cover-note--bottom">
-						VISIBLE PROGRESS
+						{content.coverBottomNote}
 					</span>
 				</div>
 
 				<dl className="project-detail__meta">
-					{PROJECT_META.map(([term, description]) => (
-						<div key={term}>
-							<dt>{term}</dt>
-							<dd>{description}</dd>
+					{content.meta.map((item) => (
+						<div key={item.label}>
+							<dt>{item.label}</dt>
+							<dd>{item.value}</dd>
 						</div>
 					))}
 				</dl>
@@ -244,21 +240,14 @@ export default function ProjectDetailPage() {
 						className="project-detail__section project-detail__reveal"
 					>
 						<p className="project-detail__section-number">01 / THE BRIEF</p>
-						<h2>Saving was not the real problem. Feeling progress was.</h2>
+						<h2>{content.briefTitle}</h2>
 						<div className="project-detail__two-column">
-							<p className="project-detail__large-copy">
-								Young earners already knew they should save. What stopped them
-								was a loop of delayed rewards, intimidating language, and tools
-								that demanded too much attention.
-							</p>
+							<p className="project-detail__large-copy">{content.briefBody}</p>
 							<div className="project-detail__brief-card">
 								<span className="project-detail__brief-label">
 									HOW MIGHT WE
 								</span>
-								<p>
-									Make saving feel rewarding now, while keeping automation calm,
-									transparent and reversible?
-								</p>
+								<p>{content.howMightWe}</p>
 							</div>
 						</div>
 					</section>
@@ -271,13 +260,13 @@ export default function ProjectDetailPage() {
 							02 / RESEARCH SIGNALS
 						</p>
 						<div className="project-detail__heading-row">
-							<h2>Three frictions kept showing up.</h2>
+							<h2>{content.researchTitle}</h2>
 							<span className="project-detail__heading-tag">
-								12 interviews / concept exercise
+								{content.researchTag}
 							</span>
 						</div>
 						<div className="project-detail__signal-grid">
-							{RESEARCH_SIGNALS.map((signal) => (
+							{content.researchSignals.map((signal) => (
 								<article key={signal.number}>
 									<span>{signal.number}</span>
 									<h3>{signal.title}</h3>
@@ -287,11 +276,8 @@ export default function ProjectDetailPage() {
 						</div>
 						<blockquote>
 							<span>“</span>
-							<p>
-								I do not want to become an investor. I just want future me to
-								have options.
-							</p>
-							<cite>— Synthesized research insight</cite>
+							<p>{content.quote}</p>
+							<cite>{content.quoteCite}</cite>
 						</blockquote>
 					</section>
 
@@ -302,16 +288,16 @@ export default function ProjectDetailPage() {
 						<p className="project-detail__section-number">
 							03 / DESIGN DECISIONS
 						</p>
-						<h2>Reduce the decisions before reducing the taps.</h2>
+						<h2>{content.decisionsTitle}</h2>
 						<ol
 							className="project-detail__flow"
 							aria-label="Three-step product flow"
 						>
-							{FLOW_STEPS.map((item, index) => (
+							{content.flowSteps.map((item, index) => (
 								<li key={item.step}>
 									<div>
 										<span>{item.step}</span>
-										{index < FLOW_STEPS.length - 1 && <ArrowIcon />}
+										{index < content.flowSteps.length - 1 && <ArrowIcon />}
 									</div>
 									<h3>{item.title}</h3>
 									<p>{item.body}</p>
@@ -319,22 +305,13 @@ export default function ProjectDetailPage() {
 							))}
 						</ol>
 						<div className="project-detail__decision-pair">
-							<article>
-								<p className="project-detail__mono-label">DECISION A</p>
-								<h3>Goals before portfolios</h3>
-								<p>
-									The product speaks in outcomes—laptop, trip, emergency
-									buffer—before introducing investment mechanics.
-								</p>
-							</article>
-							<article>
-								<p className="project-detail__mono-label">DECISION B</p>
-								<h3>Automation with an escape hatch</h3>
-								<p>
-									Every rule exposes its limit, next action and pause
-									control—building trust through reversibility.
-								</p>
-							</article>
+							{content.decisionCards.map((card) => (
+								<article key={card.label}>
+									<p className="project-detail__mono-label">{card.label}</p>
+									<h3>{card.title}</h3>
+									<p>{card.body}</p>
+								</article>
+							))}
 						</div>
 					</section>
 
@@ -345,7 +322,7 @@ export default function ProjectDetailPage() {
 						<p className="project-detail__section-number">
 							04 / PROTOTYPE MOMENT
 						</p>
-						<SavingsSimulator />
+						<SavingsSimulator kind={prototypeKind} />
 					</section>
 
 					<section
@@ -354,39 +331,27 @@ export default function ProjectDetailPage() {
 					>
 						<p className="project-detail__section-number">05 / OUTCOME</p>
 						<div className="project-detail__heading-row">
-							<h2>The concept became easier to explain—and easier to trust.</h2>
+							<h2>{content.outcomesTitle}</h2>
 							<span className="project-detail__heading-tag">
-								Prototype validation / directional
+								{content.outcomesTag}
 							</span>
 						</div>
 						<div className="project-detail__outcomes">
-							<article>
-								<strong>42%</strong>
-								<span className="project-detail__outcome-label">
-									faster goal setup
-								</span>
-							</article>
-							<article>
-								<strong>8/10</strong>
-								<span className="project-detail__outcome-label">
-									understood the saving rule
-								</span>
-							</article>
-							<article>
-								<strong>3</strong>
-								<span className="project-detail__outcome-label">
-									usability iterations
-								</span>
-							</article>
+							{content.outcomes.map((outcome) => (
+								<article key={outcome.label}>
+									<strong>{outcome.value}</strong>
+									<span className="project-detail__outcome-label">
+										{outcome.label}
+									</span>
+								</article>
+							))}
 						</div>
 						<div className="project-detail__reflection">
 							<p className="project-detail__mono-label">
 								WHAT I WOULD TEST NEXT
 							</p>
 							<p className="project-detail__reflection-copy">
-								Move beyond comprehension into behavior: measure whether
-								transparent automation improves 30-day retention without
-								increasing financial anxiety.
+								{content.reflection}
 							</p>
 						</div>
 					</section>
@@ -395,7 +360,7 @@ export default function ProjectDetailPage() {
 
 			<section className="project-detail__next project-detail__reveal">
 				<p>CASE FILE COMPLETE</p>
-				<h2>Want to see the rest of the board?</h2>
+				<h2>{content.nextTitle}</h2>
 				<Link to="/work">
 					Explore selected work <ArrowIcon />
 				</Link>

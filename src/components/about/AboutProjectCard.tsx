@@ -1,9 +1,11 @@
 import { Link } from "@tanstack/react-router";
+import type { ProjectDetailPath } from "../../lib/content/types";
 
 export type AboutProjectCardProps = {
 	description: string;
 	featured?: boolean;
-	href?: "/projects/fintech-hub" | "/work";
+	href?: ProjectDetailPath;
+	imageUrl?: string;
 	tag: string;
 	title: string;
 };
@@ -11,17 +13,19 @@ export type AboutProjectCardProps = {
 export default function AboutProjectCard({
 	description,
 	featured = false,
-	href = "/work",
+	href = "/projects/fintech-hub",
+	imageUrl = "/assets/about-project.png",
 	tag,
 	title,
 }: AboutProjectCardProps) {
+	const slug = href.replace("/projects/", "");
 	return (
 		<article
 			className={`about-project-card group flex min-h-[505px] flex-col items-start gap-4 rounded-3xl border-[3px] border-ink bg-white p-5 shadow-[4px_4px_0_rgba(30,30,30,0.15)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[7px_9px_0_rgba(30,30,30,0.13)] motion-reduce:transition-none ${featured ? "lg:-rotate-[1.2deg]" : ""}`.trim()}
 		>
 			<div className="h-[260px] w-full shrink-0 overflow-hidden rounded-[14px] border-2 border-ink">
 				<img
-					src="/assets/about-project.png"
+					src={imageUrl}
 					alt=""
 					className="about-project-card__image size-full object-cover"
 				/>
@@ -47,7 +51,8 @@ export default function AboutProjectCard({
 
 			<div className="mt-auto flex w-full items-center justify-between pt-3">
 				<Link
-					to={href}
+					to="/projects/$slug"
+					params={{ slug }}
 					className="about-project-card__link font-ui text-sm leading-[1.4] font-semibold tracking-[-0.07px] text-highlight-blue focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-highlight-blue"
 				>
 					Open Board <span aria-hidden="true">→</span>

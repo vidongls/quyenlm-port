@@ -5,14 +5,15 @@ import HomeHero from "./HomeHero";
 import HomeWidgets from "./HomeWidgets";
 import ProjectCard from "./ProjectCard";
 import "./HomeMotion.css";
+import type { SiteSettings } from "../../lib/content/types";
 
-export default function HomeScene() {
+export default function HomeScene({ settings }: { settings: SiteSettings }) {
 	return (
 		<div className="home-scene relative size-full" data-node-id="309:7448">
 			<HomeCanvasDetails />
 			<ProjectCard />
 			<HomeDecorations />
-			<HomeHero />
+			<HomeHero settings={settings} />
 			<HomeWidgets />
 			<AboutCard />
 		</div>

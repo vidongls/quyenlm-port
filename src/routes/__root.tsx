@@ -1,5 +1,10 @@
 import { TanStackDevtools } from "@tanstack/react-devtools";
-import { createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
+import {
+	createRootRoute,
+	HeadContent,
+	Scripts,
+	useRouterState,
+} from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import {
 	CustomCursor,
@@ -7,10 +12,12 @@ import {
 	SiteHeader,
 	SitePreloader,
 } from "../components/ui";
+import { getPublishedSiteSettingsFn } from "../lib/content/functions";
 
 import appCss from "../styles.css?url";
 
 export const Route = createRootRoute({
+	loader: () => getPublishedSiteSettingsFn(),
 	head: () => ({
 		meta: [
 			{
@@ -35,6 +42,11 @@ export const Route = createRootRoute({
 });
 
 function RootDocument({ children }: { children: React.ReactNode }) {
+	const settings = Route.useLoaderData();
+	const isAdmin = useRouterState({
+		select: (state) => state.location.pathname.startsWith("/admin"),
+	});
+
 	return (
 		<html lang="en">
 			<head>
@@ -43,11 +55,11 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 			<body className="bg-page text-ink font-sans antialiased [overflow-wrap:anywhere]">
 				<div className="site-shell">
 					{children}
-					<SiteHeader />
-					<FloatingNav />
+					{!isAdmin && <SiteHeader resumeHref={settings.resumeUrl} />}
+					{!isAdmin && <FloatingNav />}
 				</div>
-				<SitePreloader />
-				<CustomCursor />
+				{!isAdmin && <SitePreloader />}
+				{!isAdmin && <CustomCursor />}
 				<TanStackDevtools
 					config={{
 						position: "bottom-right",

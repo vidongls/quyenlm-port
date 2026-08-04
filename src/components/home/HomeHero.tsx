@@ -1,8 +1,9 @@
+import type { SiteSettings } from "../../lib/content/types";
 import DraggableSticker from "./DraggableSticker";
 import InvisibleDesignEffect from "./InvisibleDesignEffect";
 import RotatingTypewriter from "./RotatingTypewriter";
 
-export default function HomeHero() {
+export default function HomeHero({ settings }: { settings: SiteSettings }) {
 	return (
 		<section
 			className="home-hero absolute top-[370px] left-[324.5px] z-20 flex w-[791px] flex-col items-center gap-4 text-center"
@@ -13,12 +14,12 @@ export default function HomeHero() {
 				className="home-role-tag-drag"
 			>
 				<p className="home-hero__tag rounded-full bg-highlight-yellow px-2.5 py-1 font-ui text-xs leading-[1.4] font-bold text-ink">
-					Product Designer · Research &amp; Interfaces
+					{settings.role}
 				</p>
 			</DraggableSticker>
 
 			<h1 className="home-hero__title w-full font-display text-[88px] leading-[1.05] font-extrabold tracking-[-0.88px] text-ink">
-				Good Design&apos;s <InvisibleDesignEffect />
+				{settings.headline} <InvisibleDesignEffect word={settings.highlight} />
 			</h1>
 
 			<p className="home-hero__subtitle flex w-full items-center justify-center font-code text-[13px] leading-normal font-bold whitespace-nowrap text-muted">

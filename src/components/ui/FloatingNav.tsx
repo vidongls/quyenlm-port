@@ -1,5 +1,5 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { useLayoutEffect, useRef, useState } from "react";
+import { type CSSProperties, useLayoutEffect, useRef, useState } from "react";
 import "./NavItem.css";
 
 const NAV_ITEMS = [
@@ -9,6 +9,8 @@ const NAV_ITEMS = [
 		label: "Home",
 		shortLabel: "Home",
 		color: "black",
+		hint: "Frame / Home",
+		tilt: "-1.25deg",
 	},
 	{
 		id: "work",
@@ -16,6 +18,8 @@ const NAV_ITEMS = [
 		label: "Selected Work",
 		shortLabel: "Work",
 		color: "blue",
+		hint: "Frame / Work",
+		tilt: "1deg",
 	},
 	{
 		id: "about",
@@ -23,6 +27,8 @@ const NAV_ITEMS = [
 		label: "Get To Know Me",
 		shortLabel: "About",
 		color: "purple",
+		hint: "Frame / About",
+		tilt: "-0.8deg",
 	},
 	{
 		id: "contact",
@@ -30,6 +36,8 @@ const NAV_ITEMS = [
 		label: "Say Hi!",
 		shortLabel: "Hi!",
 		color: "yellow",
+		hint: "Frame / Contact",
+		tilt: "1.25deg",
 	},
 ] as const;
 
@@ -98,7 +106,7 @@ export default function FloatingNav({
 
 	return (
 		<nav
-			className={`fixed bottom-3 left-1/2 z-50 flex max-w-[calc(100vw-16px)] -translate-x-1/2 items-center gap-1 rounded-[20px] border-2 border-[#1e1e1e] bg-white p-2 shadow-[0_12px_16px_rgba(0,0,0,0.08)] sm:bottom-6 sm:gap-2 sm:rounded-[24px] sm:p-3 ${className}`.trim()}
+			className={`floating-nav fixed bottom-3 left-1/2 z-50 flex max-w-[calc(100vw-16px)] -translate-x-1/2 items-center gap-1 rounded-[20px] border-2 border-[#1e1e1e] bg-white p-2 shadow-[0_12px_16px_rgba(0,0,0,0.08)] sm:bottom-6 sm:gap-2 sm:rounded-[24px] sm:p-3 ${className}`.trim()}
 			aria-label="Primary navigation"
 			data-node-id="305:6402"
 		>
@@ -127,11 +135,25 @@ export default function FloatingNav({
 							className="nav-item relative z-10 max-[380px]:!px-2 max-sm:!px-3"
 							data-selected={isSelected || undefined}
 							data-selected-color={item.color}
+							style={{ "--nav-hover-tilt": item.tilt } as CSSProperties}
 							aria-current={isSelected ? "page" : undefined}
 							onClick={() => onItemChange?.(item.id)}
 						>
-							<span className="sm:hidden">{item.shortLabel}</span>
-							<span className="max-sm:hidden">{item.label}</span>
+							<span className="nav-item__label sm:hidden">
+								{item.shortLabel}
+							</span>
+							<span className="nav-item__label max-sm:hidden">
+								{item.label}
+							</span>
+							<span className="nav-item__hint" aria-hidden="true">
+								{item.hint}
+							</span>
+							<span className="nav-item__selection-frame" aria-hidden="true">
+								<i />
+								<i />
+								<i />
+								<i />
+							</span>
 						</Link>
 					);
 				})}
@@ -151,14 +173,14 @@ export default function FloatingNav({
 			<div className="flex shrink-0 gap-1 max-[480px]:hidden">
 				<a
 					href={linkedinHref}
-					className="flex size-10 items-center justify-center rounded-xl border-2 border-[#1e1e1e] bg-white transition-shadow duration-200 hover:shadow-[4px_4px_0_rgba(30,30,30,0.15)] focus-visible:shadow-[4px_4px_0_rgba(30,30,30,0.15)] focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-highlight-blue motion-reduce:transition-none"
+					className="floating-nav__social floating-nav__social--linkedin flex size-10 items-center justify-center rounded-xl border-2 border-[#1e1e1e] bg-white focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-highlight-blue"
 					aria-label="LinkedIn"
 				>
 					<img src="/assets/nav-linkedin.svg" alt="" className="size-[18px]" />
 				</a>
 				<a
 					href={emailHref}
-					className="flex size-10 items-center justify-center rounded-xl border-2 border-[#1e1e1e] bg-white transition-shadow duration-200 hover:shadow-[4px_4px_0_rgba(30,30,30,0.15)] focus-visible:shadow-[4px_4px_0_rgba(30,30,30,0.15)] focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-highlight-blue motion-reduce:transition-none"
+					className="floating-nav__social floating-nav__social--email flex size-10 items-center justify-center rounded-xl border-2 border-[#1e1e1e] bg-white focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-highlight-blue"
 					aria-label="Send email"
 				>
 					<img src="/assets/nav-mail.svg" alt="" className="size-[18px]" />

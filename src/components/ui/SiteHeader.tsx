@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router";
+import "./SiteHeader.css";
 
 export type SiteHeaderProps = {
 	className?: string;
@@ -31,10 +32,23 @@ export default function SiteHeader({
 
 			<a
 				href={resumeHref}
-				className="pointer-events-auto flex min-h-11 items-center justify-center rounded-xl border-2 border-ink bg-white px-3 py-2.5 font-ui text-sm leading-[1.4] font-bold tracking-[-0.07px] whitespace-nowrap transition-shadow duration-200 hover:shadow-[4px_4px_0_rgba(30,30,30,0.15)] focus-visible:shadow-[4px_4px_0_rgba(30,30,30,0.15)] focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-highlight-blue motion-reduce:transition-none sm:min-h-12 sm:px-6 sm:py-3.5"
+				download="Quyen-Le-Minh-Resume.pdf"
+				aria-label="Download Quyen's resume as PDF"
+				className="resume-download pointer-events-auto"
 			>
-				<span className="sm:hidden">Resume</span>
-				<span className="max-sm:hidden">Quyen&apos;s Resume</span>
+				<span className="resume-download__wash" aria-hidden="true" />
+				<span className="resume-download__label">
+					<span className="sm:hidden">Resume</span>
+					<span className="max-sm:hidden">Quyen&apos;s Resume</span>
+				</span>
+				<span className="resume-download__format" aria-hidden="true">
+					PDF
+				</span>
+				<span className="resume-download__icon" aria-hidden="true">
+					<svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+						<path d="M12 4v10m0 0 4-4m-4 4-4-4M5 18.5h14" />
+					</svg>
+				</span>
 			</a>
 		</header>
 	);
