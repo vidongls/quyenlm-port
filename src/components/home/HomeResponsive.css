@@ -5,9 +5,14 @@
 	overflow: hidden;
 	padding: 112px 16px 144px;
 	background:
-		radial-gradient(circle, rgb(30 30 30 / 10%) 1.5px, transparent 1.7px) 0 0 /
+		radial-gradient(circle, rgb(89 73 116 / 13%) 1.5px, transparent 1.7px) 0 0 /
 		36px 72px,
-		var(--color-background-light);
+		linear-gradient(
+			135deg,
+			#f5f2fa 0%,
+			var(--color-background-light) 58%,
+			#ece8f5 100%
+		);
 }
 
 .home-mobile__hero,

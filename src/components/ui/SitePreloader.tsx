@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import type { SiteSettings } from "../../lib/content/types";
 import "./SitePreloader.css";
 
 type PreloaderPhase = "idle" | "playing" | "exiting";
@@ -25,7 +26,11 @@ function preloadAssets() {
 	);
 }
 
-export default function SitePreloader() {
+export default function SitePreloader({
+	settings,
+}: {
+	settings: SiteSettings;
+}) {
 	const [visible, setVisible] = useState(true);
 	const [phase, setPhase] = useState<PreloaderPhase>("idle");
 	const counterRef = useRef<HTMLSpanElement>(null);
@@ -110,7 +115,7 @@ export default function SitePreloader() {
 
 			<div className="site-preloader__grid" aria-hidden="true" />
 			<div className="site-preloader__topbar" aria-hidden="true">
-				<span>quyenlee.design</span>
+				<span>quyenlm.site</span>
 				<span>HOME / HERO</span>
 			</div>
 
@@ -124,12 +129,10 @@ export default function SitePreloader() {
 					<span className="site-preloader__scanline" />
 
 					<div className="site-preloader__copy">
-						<span className="site-preloader__role">
-							PRODUCT DESIGNER · RESEARCH &amp; INTERFACES
-						</span>
+						<span className="site-preloader__role">{settings.role}</span>
 						<p>
-							<span>GOOD DESIGN&apos;S</span>
-							<strong>INVISIBLE</strong>
+							<span>{settings.headline}</span>
+							<strong>{settings.highlight}</strong>
 						</p>
 						<small>MADE IN VIET NAM · BUILT WITH CURIOSITY</small>
 					</div>

@@ -52,7 +52,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 						linkedinHref={settings.linkedinUrl}
 					/>
 				</div>
-				<SitePreloader />
+				<SitePreloader settings={settings} />
 				<CustomCursor />
 				<TanStackDevtools
 					config={{

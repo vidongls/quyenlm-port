@@ -30,7 +30,7 @@ function SectionHeading({
 	title: string;
 }) {
 	return (
-		<header className="about-section-heading">
+		<header className="about-section-heading" data-reveal>
 			<p>{eyebrow}</p>
 			<h2 id={id}>{title}</h2>
 		</header>

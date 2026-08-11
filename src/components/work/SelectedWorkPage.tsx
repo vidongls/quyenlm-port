@@ -53,9 +53,8 @@ export default function SelectedWorkPage({
 						Selected <span>Work</span>
 					</h1>
 					<p className="work-hero__intro">
-						Not a gallery of finished screens. A collection of messy problems,
-						sharp questions and the decisions that made each product feel
-						obvious.
+						Three messy problems, the questions behind them, and the decisions
+						that made each product clearer.
 					</p>
 				</div>
 

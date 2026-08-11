@@ -1,16 +1,10 @@
 import { type FormEvent, useState } from "react";
+import { CONTACT_PROJECT_TYPES, CONTACT_TIMELINES } from "../../lib/contact";
 import type { SiteSettings } from "../../lib/content/types";
 import DraggableSticker from "../home/DraggableSticker";
 import "./ContactPage.css";
 
-const PROJECT_TYPES = [
-	"Hiring / Recruitment",
-	"New product",
-	"Improve a flow",
-	"Research",
-	"Design system",
-	"Just saying hi",
-] as const;
+type SubmitStatus = "idle" | "submitting" | "success" | "error";
 
 function ArrowIcon() {
 	return (
@@ -55,7 +49,7 @@ function LocationIcon() {
 
 export default function ContactPage({ settings }: { settings: SiteSettings }) {
 	const [copied, setCopied] = useState(false);
-	const [draftOpened, setDraftOpened] = useState(false);
+	const [submitStatus, setSubmitStatus] = useState<SubmitStatus>("idle");
 
 	async function copyEmail() {
 		try {
@@ -67,29 +61,32 @@ export default function ContactPage({ settings }: { settings: SiteSettings }) {
 		}
 	}
 
-	function handleSubmit(event: FormEvent<HTMLFormElement>) {
+	async function handleSubmit(event: FormEvent<HTMLFormElement>) {
 		event.preventDefault();
-		const formData = new FormData(event.currentTarget);
-		const name = String(formData.get("name") ?? "").trim();
-		const replyEmail = String(formData.get("email") ?? "").trim();
-		const projectType = String(formData.get("projectType") ?? "Project");
-		const timeline = String(formData.get("timeline") ?? "Flexible");
-		const message = String(formData.get("message") ?? "").trim();
-		const subject = `[Portfolio] ${projectType} — ${name}`;
-		const body = [
-			`Hi Quyen,`,
-			"",
-			message,
-			"",
-			`Project type: ${projectType}`,
-			`Timing: ${timeline}`,
-			`Reply to: ${replyEmail}`,
-			"",
-			`— ${name}`,
-		].join("\n");
+		const form = event.currentTarget;
+		const formData = new FormData(form);
+		setSubmitStatus("submitting");
 
-		setDraftOpened(true);
-		window.location.href = `mailto:${settings.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+		try {
+			const response = await fetch("/api/contact", {
+				body: JSON.stringify({
+					email: String(formData.get("email") ?? ""),
+					message: String(formData.get("message") ?? ""),
+					name: String(formData.get("name") ?? ""),
+					projectType: String(formData.get("projectType") ?? ""),
+					timeline: String(formData.get("timeline") ?? ""),
+					website: String(formData.get("website") ?? ""),
+				}),
+				headers: { "Content-Type": "application/json" },
+				method: "POST",
+			});
+
+			if (!response.ok) throw new Error("Unable to send contact form");
+			form.reset();
+			setSubmitStatus("success");
+		} catch {
+			setSubmitStatus("error");
+		}
 	}
 
 	return (
@@ -109,10 +106,7 @@ export default function ContactPage({ settings }: { settings: SiteSettings }) {
 				<h1>
 					Send me the <span data-text="messy version.">messy version.</span>
 				</h1>
-				<p>
-					A half-formed idea, a complicated workflow, a research question nobody
-					can agree on—those are usually the best places to start.
-				</p>
+				<p>Have a product question or a complicated workflow? Start there.</p>
 			</header>
 
 			<section className="contact-layout" aria-label="Contact Quyen">
@@ -200,7 +194,7 @@ export default function ContactPage({ settings }: { settings: SiteSettings }) {
 					<form
 						className="contact-form"
 						onSubmit={handleSubmit}
-						data-opened={draftOpened || undefined}
+						data-status={submitStatus}
 					>
 						<div className="contact-form__tape" aria-hidden="true" />
 						<header className="contact-form__header">
@@ -239,7 +233,7 @@ export default function ContactPage({ settings }: { settings: SiteSettings }) {
 						<fieldset className="contact-project-type">
 							<legend>What are we untangling?</legend>
 							<div>
-								{PROJECT_TYPES.map((type, index) => (
+								{CONTACT_PROJECT_TYPES.map((type, index) => (
 									<label key={type}>
 										<input
 											type="radio"
@@ -264,6 +258,16 @@ export default function ContactPage({ settings }: { settings: SiteSettings }) {
 							/>
 						</div>
 
+						<div className="contact-honeypot" aria-hidden="true">
+							<label htmlFor="contact-website">Website</label>
+							<input
+								id="contact-website"
+								name="website"
+								tabIndex={-1}
+								autoComplete="off"
+							/>
+						</div>
+
 						<div className="contact-form__footer">
 							<div className="contact-field contact-field--timeline">
 								<label htmlFor="contact-timeline">Timing</label>
@@ -272,22 +276,37 @@ export default function ContactPage({ settings }: { settings: SiteSettings }) {
 									name="timeline"
 									defaultValue="Flexible"
 								>
-									<option>Flexible</option>
-									<option>This month</option>
-									<option>This quarter</option>
-									<option>Exploring for later</option>
+									{CONTACT_TIMELINES.map((timeline) => (
+										<option key={timeline}>{timeline}</option>
+									))}
 								</select>
 							</div>
-							<button className="contact-submit" type="submit">
-								<span>{draftOpened ? "Draft ready" : "Open email draft"}</span>
+							<button
+								className="contact-submit"
+								disabled={submitStatus === "submitting"}
+								type="submit"
+							>
+								<span>
+									{submitStatus === "submitting"
+										? "Sending…"
+										: submitStatus === "success"
+											? "Sent"
+											: submitStatus === "error"
+												? "Try again"
+												: "Send brief"}
+								</span>
 								<ArrowIcon />
 							</button>
 						</div>
 
 						<p className="contact-form__note" aria-live="polite">
-							{draftOpened
-								? "Email draft opened—review it, then press Send."
-								: "Opens in your email app. Nothing is sent automatically."}
+							{submitStatus === "success"
+								? "Sent successfully. I’ll get back to you soon."
+								: submitStatus === "error"
+									? "Could not send. Please try again."
+									: submitStatus === "submitting"
+										? "Sending your brief securely…"
+										: "Your message goes straight to Quyen’s inbox."}
 						</p>
 					</form>
 				</div>

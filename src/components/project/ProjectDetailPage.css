@@ -82,10 +82,11 @@
 }
 
 .project-detail__hero h1 {
-	max-width: 760px;
+	max-width: 680px;
 	margin: 20px 0 0;
-	font: 800 clamp(54px, 6.1vw, 92px) / 0.92 var(--font-display);
-	letter-spacing: -0.055em;
+	font:
+		800 var(--page-title-size) / var(--page-title-leading) var(--font-display);
+	letter-spacing: var(--page-title-tracking);
 }
 
 .project-detail__title-accent {
@@ -94,10 +95,11 @@
 }
 
 .project-detail__lead {
-	max-width: 650px;
-	margin: 28px 0 0;
-	font-size: clamp(17px, 1.5vw, 21px);
-	line-height: 1.55;
+	max-width: 620px;
+	margin: 24px 0 0;
+	font-size: var(--page-copy-size);
+	line-height: var(--page-copy-leading);
+	letter-spacing: -0.01em;
 }
 
 .project-detail__cover {
@@ -315,10 +317,12 @@
 }
 
 .project-detail__section h2 {
-	max-width: 900px;
+	max-width: 760px;
 	margin: 0;
-	font: 800 clamp(38px, 4.2vw, 64px) / 1 var(--font-display);
-	letter-spacing: -0.045em;
+	font:
+		800 var(--page-section-size) / var(--page-section-leading)
+		var(--font-display);
+	letter-spacing: var(--page-title-tracking);
 }
 
 .project-detail__two-column {
@@ -331,8 +335,9 @@
 
 .project-detail__large-copy {
 	margin: 0;
-	font-size: clamp(20px, 2vw, 28px);
-	line-height: 1.5;
+	font-size: 18px;
+	line-height: 1.55;
+	letter-spacing: -0.01em;
 }
 
 .project-detail__brief-card {

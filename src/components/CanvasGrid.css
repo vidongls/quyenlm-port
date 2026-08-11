@@ -1,12 +1,18 @@
 :root {
 	--canvas-bg: var(--color-canvas);
-	--canvas-grid-line: rgba(30, 30, 30, 0.035);
-	--canvas-dot: rgba(30, 30, 30, 0.12);
+	--canvas-grid-line: rgba(89, 73, 116, 0.075);
+	--canvas-dot: rgba(89, 73, 116, 0.16);
 }
 
 .canvas-page {
 	height: 100dvh;
-	background: var(--canvas-bg);
+	background:
+		radial-gradient(
+			circle at 78% 16%,
+			rgb(199 177 244 / 20%),
+			transparent 26rem
+		),
+		linear-gradient(135deg, #f5f2fa 0%, var(--canvas-bg) 58%, #ece8f5 100%);
 	cursor: grab;
 	overscroll-behavior: none;
 	touch-action: none;

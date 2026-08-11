@@ -18,10 +18,10 @@ export const Route = createFileRoute("/projects/$slug")({
 	component: DynamicProjectDetailRoute,
 	head: ({ params }) => ({
 		meta: [
-			{ title: `${params.slug.replaceAll("-", " ")} — Quyen Le Minh` },
+			{ title: `${params.slug.replaceAll("-", " ")} — Le Minh Quyen` },
 			{
 				name: "description",
-				content: "A product design case study by Quyen Le Minh.",
+				content: "A product design case study by Le Minh Quyen.",
 			},
 		],
 	}),

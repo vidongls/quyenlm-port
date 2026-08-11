@@ -8,7 +8,7 @@
 	--color-accent-blue: #18a0fb;
 	--color-accent-coral: #ff7262;
 	--color-accent-green: #4fbf67;
-	--color-accent-purple: #c5a5fc;
+	--color-accent-purple: #c7b1f4;
 	--color-accent-pink: #ff9fe5;
 	--color-status-success: #21c22d;
 	--color-status-info: #3b82f6;
@@ -26,23 +26,23 @@
 	--color-text-invisible: #d1d1d1;
 
 	/* Background */
-	--color-background-light: #f6f6f6;
-	--color-background-dark: #332f3a;
-	--color-background-gray-100: #f2f2f2;
-	--color-background-gray-200: #e9e8e7;
-	--color-background-gray-250: #e5e5e5;
-	--color-background-gray-300: #d2d2cf;
-	--color-background-gray-350: #75736b;
-	--color-background-gray-25: #f7f7f7;
+	--color-background-light: #f1eff7;
+	--color-background-dark: #302b3b;
+	--color-background-gray-100: #eeecf4;
+	--color-background-gray-200: #dfdbe9;
+	--color-background-gray-250: #d8d3e4;
+	--color-background-gray-300: #c4bdd4;
+	--color-background-gray-350: #726b7f;
+	--color-background-gray-25: #f8f6fb;
 
 	/* Surface */
-	--color-surface-blue: #e2f3ff;
-	--color-surface-peach: #ffefda;
-	--color-surface-green: #e4fbea;
+	--color-surface-blue: #e6edff;
+	--color-surface-peach: #fff0e8;
+	--color-surface-green: #e8f8ee;
 
 	/* Badge */
 	--color-badge-background: #fff8d4;
-	--color-badge-border: #e5e4e0;
+	--color-badge-border: #ddd8e8;
 
 	/* Semantic aliases */
 	--color-action-primary: var(--color-brand-orange);
