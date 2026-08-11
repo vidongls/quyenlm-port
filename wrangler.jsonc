@@ -4,13 +4,6 @@
   "compatibility_date": "2025-09-02",
 	"compatibility_flags": ["nodejs_compat"],
 	"main": "@tanstack/react-start/server-entry",
-	"send_email": [
-		{
-			"name": "EMAIL",
-			"allowed_destination_addresses": ["hello@quyenlm.site"],
-			"allowed_sender_addresses": ["hello@quyenlm.site"]
-		}
-	],
 	"observability": {
     "enabled": true
   }

@@ -318,7 +318,7 @@ export default function ContactPage({ settings }: { settings: SiteSettings }) {
 									? "Could not send. Please try again."
 									: submitStatus === "submitting"
 										? "Sending your brief securely…"
-										: "Your message goes straight to Quyen’s inbox."}
+										: "Your message goes straight to Quyen’s Telegram."}
 						</p>
 					</form>
 				</div>

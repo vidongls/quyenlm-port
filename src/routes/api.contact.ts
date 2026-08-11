@@ -1,27 +1,18 @@
 import { env } from "cloudflare:workers";
 import { createFileRoute } from "@tanstack/react-router";
 import {
-	escapeHtml,
 	isContactBodyTooLarge,
 	validateContactSubmission,
 } from "../lib/contact";
 
-const RECIPIENT = "hello@quyenlm.site";
-const SENDER = "hello@quyenlm.site";
 const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
 const RATE_LIMIT_MAX_REQUESTS = 5;
 
 const recentRequests = new Map<string, number[]>();
 
-type ContactEmailBinding = {
-	send(message: {
-		from: string;
-		html: string;
-		replyTo?: string;
-		subject: string;
-		text: string;
-		to: string;
-	}): Promise<unknown>;
+type TelegramEnv = {
+	TELEGRAM_BOT_TOKEN?: string;
+	TELEGRAM_CHAT_ID?: string;
 };
 
 function jsonResponse(body: Record<string, boolean | string>, status = 200) {
@@ -59,36 +50,23 @@ function isRateLimited(ip: string) {
 	return false;
 }
 
-function buildEmail(data: {
+function buildTelegramMessage(data: {
 	email: string;
 	message: string;
 	name: string;
 	projectType: string;
 	timeline: string;
 }) {
-	const subject = `[Portfolio] ${data.projectType} — ${data.name}`;
-	const text = [
-		`New contact brief from ${data.name}`,
+	return [
+		"🔔 New portfolio contact",
 		"",
+		`Name: ${data.name}`,
 		`Email: ${data.email}`,
-		`Project type: ${data.projectType}`,
-		`Timing: ${data.timeline}`,
+		`Project: ${data.projectType}`,
+		`Timeline: ${data.timeline}`,
 		"",
-		data.message,
+		data.message.slice(0, 3_500),
 	].join("\n");
-	const html = `
-		<div style="font-family:Arial,sans-serif;line-height:1.6;color:#1e1e1e;max-width:640px">
-			<h1 style="font-size:24px;margin-bottom:24px">New contact brief</h1>
-			<p><strong>From:</strong> ${escapeHtml(data.name)}</p>
-			<p><strong>Email:</strong> ${escapeHtml(data.email)}</p>
-			<p><strong>Project type:</strong> ${escapeHtml(data.projectType)}</p>
-			<p><strong>Timing:</strong> ${escapeHtml(data.timeline)}</p>
-			<hr style="border:0;border-top:1px solid #ddd;margin:24px 0" />
-			<p style="white-space:pre-wrap">${escapeHtml(data.message)}</p>
-		</div>
-	`;
-
-	return { html, subject, text };
 }
 
 async function handleContact(request: Request) {
@@ -132,21 +110,36 @@ async function handleContact(request: Request) {
 		return jsonResponse({ ok: true });
 	}
 
-	const email = buildEmail(result.data);
+	const telegramEnv = env as unknown as TelegramEnv;
+	if (!telegramEnv.TELEGRAM_BOT_TOKEN || !telegramEnv.TELEGRAM_CHAT_ID) {
+		console.error("Telegram contact secrets are not configured");
+		return jsonResponse({ error: "SEND_FAILED", ok: false }, 500);
+	}
+
 	try {
-		await (env.EMAIL as unknown as ContactEmailBinding).send({
-			from: SENDER,
-			html: email.html,
-			replyTo: result.data.email,
-			subject: email.subject,
-			text: email.text,
-			to: RECIPIENT,
-		});
+		const response = await fetch(
+			`https://api.telegram.org/bot${telegramEnv.TELEGRAM_BOT_TOKEN}/sendMessage`,
+			{
+				body: JSON.stringify({
+					chat_id: telegramEnv.TELEGRAM_CHAT_ID,
+					disable_web_page_preview: true,
+					text: buildTelegramMessage(result.data),
+				}),
+				headers: { "Content-Type": "application/json" },
+				method: "POST",
+			},
+		);
+		const telegramResult = (await response.json()) as {
+			description?: string;
+			ok?: boolean;
+		};
+		if (!response.ok || !telegramResult.ok) {
+			throw new Error(telegramResult.description ?? "Telegram request failed");
+		}
 	} catch (error) {
-		const emailError = error as { code?: string; message?: string };
-		console.error("Contact email send failed", {
-			code: emailError.code ?? "UNKNOWN",
-			message: emailError.message ?? "Unknown email service error",
+		const telegramError = error as { message?: string };
+		console.error("Telegram contact notification failed", {
+			message: telegramError.message ?? "Unknown Telegram error",
 		});
 		return jsonResponse({ error: "SEND_FAILED", ok: false }, 500);
 	}
