@@ -484,6 +484,16 @@
 		box-shadow 220ms ease;
 }
 
+.contact-submit__spinner {
+	width: 14px;
+	height: 14px;
+	flex: none;
+	border: 2px solid rgb(255 255 255 / 35%);
+	border-top-color: white;
+	border-radius: 50%;
+	animation: contact-submit-spin 700ms linear infinite;
+}
+
 .contact-submit:disabled {
 	cursor: wait;
 	opacity: 0.65;
@@ -638,6 +648,12 @@
 	}
 }
 
+@keyframes contact-submit-spin {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
 @media (max-width: 960px) {
 	.contact-layout {
 		grid-template-columns: 1fr;
@@ -714,6 +730,7 @@
 
 @media (prefers-reduced-motion: reduce) {
 	.contact-kicker,
+	.contact-submit__spinner,
 	.contact-kicker span,
 	.contact-channel__top i,
 	.contact-hero h1,

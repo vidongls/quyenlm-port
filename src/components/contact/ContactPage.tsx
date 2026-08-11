@@ -1,4 +1,4 @@
-import { type FormEvent, useState } from "react";
+import { type FormEvent, useRef, useState } from "react";
 import { CONTACT_PROJECT_TYPES, CONTACT_TIMELINES } from "../../lib/contact";
 import type { SiteSettings } from "../../lib/content/types";
 import DraggableSticker from "../home/DraggableSticker";
@@ -50,6 +50,7 @@ function LocationIcon() {
 export default function ContactPage({ settings }: { settings: SiteSettings }) {
 	const [copied, setCopied] = useState(false);
 	const [submitStatus, setSubmitStatus] = useState<SubmitStatus>("idle");
+	const isSubmittingRef = useRef(false);
 
 	async function copyEmail() {
 		try {
@@ -63,6 +64,8 @@ export default function ContactPage({ settings }: { settings: SiteSettings }) {
 
 	async function handleSubmit(event: FormEvent<HTMLFormElement>) {
 		event.preventDefault();
+		if (isSubmittingRef.current) return;
+		isSubmittingRef.current = true;
 		const form = event.currentTarget;
 		const formData = new FormData(form);
 		setSubmitStatus("submitting");
@@ -86,6 +89,8 @@ export default function ContactPage({ settings }: { settings: SiteSettings }) {
 			setSubmitStatus("success");
 		} catch {
 			setSubmitStatus("error");
+		} finally {
+			isSubmittingRef.current = false;
 		}
 	}
 
@@ -283,9 +288,16 @@ export default function ContactPage({ settings }: { settings: SiteSettings }) {
 							</div>
 							<button
 								className="contact-submit"
+								aria-busy={submitStatus === "submitting"}
 								disabled={submitStatus === "submitting"}
 								type="submit"
 							>
+								{submitStatus === "submitting" && (
+									<span
+										className="contact-submit__spinner"
+										aria-hidden="true"
+									/>
+								)}
 								<span>
 									{submitStatus === "submitting"
 										? "Sending…"
