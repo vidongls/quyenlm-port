@@ -142,7 +142,12 @@ async function handleContact(request: Request) {
 			text: email.text,
 			to: RECIPIENT,
 		});
-	} catch {
+	} catch (error) {
+		const emailError = error as { code?: string; message?: string };
+		console.error("Contact email send failed", {
+			code: emailError.code ?? "UNKNOWN",
+			message: emailError.message ?? "Unknown email service error",
+		});
 		return jsonResponse({ error: "SEND_FAILED", ok: false }, 500);
 	}
 
